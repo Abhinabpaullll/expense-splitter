@@ -5,7 +5,7 @@ const os = require('os');
 const crypto = require('crypto');
 const { DatabaseSync } = require('node:sqlite');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(os.homedir(), '.expensesplitter', 'expensesplitter.db');
 
 // Ensure db directory exists
