@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.expensesplitter.controller.RemindersController">
+
+    <VBox spacing="24.0">
+        <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+        </padding>
+
+        <!-- Top Header & Actions -->
+        <HBox alignment="CENTER_LEFT" spacing="16.0">
+            <VBox spacing="4.0">
+                <Label styleClass="text-title" text="Reminders" />
+                <Label styleClass="text-secondary" text="Outstanding dues schedule, automated checks, and debtor notifications" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#onSendAllReminders" styleClass="btn-primary" text="Send all reminders" />
+        </HBox>
+
+        <!-- Metrics Strip -->
+        <HBox spacing="16.0">
+            <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                <Label styleClass="text-caption" text="OUTSTANDING BALANCE DUE" />
+                <Label fx:id="outstandingDueLabel" styleClass="text-mono-large, text-negative" text="₹0.00" />
+                <Label fx:id="dueSubtextLabel" styleClass="text-caption" text="Active pending claims" />
+            </VBox>
+
+            <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                <Label styleClass="text-caption" text="PENDING NUDGES" />
+                <Label fx:id="pendingNudgesCountLabel" styleClass="text-mono-large" text="0" />
+                <Label styleClass="text-caption" text="Scheduled reminder notifications" />
+            </VBox>
+
+            <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                <Label styleClass="text-caption" text="AUTOMATION ENGINE" />
+                <Label fx:id="automationStatusLabel" styleClass="text-mono-large, text-positive" text="Active" />
+                <Label styleClass="text-caption" text="Background scheduler interval: 4 hours" />
+            </VBox>
+        </HBox>
+
+        <!-- Notification Banner / Feedback Box -->
+        <VBox fx:id="notificationBannerBox" managed="false" spacing="4.0" styleClass="card-subtle" visible="false">
+            <Label fx:id="notificationBannerText" styleClass="text-label, text-positive" text="All reminders dispatched successfully." />
+        </VBox>
+
+        <!-- Unsettled Dues Registry -->
+        <VBox spacing="16.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Label styleClass="text-section" text="Outstanding receivables" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label styleClass="text-caption" text="Direct nudge alerts" />
+            </HBox>
+
+            <VBox fx:id="remindersListContainer" spacing="12.0" />
+        </VBox>
+    </VBox>
+</ScrollPane>
+

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.expensesplitter.controller.SettleUpController">
+
+    <VBox spacing="24.0">
+        <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+        </padding>
+
+        <!-- Top Header & Actions -->
+        <HBox alignment="CENTER_LEFT" spacing="16.0">
+            <VBox spacing="4.0">
+                <Label styleClass="text-title" text="Settle up" />
+                <Label styleClass="text-secondary" text="Greedy graph simplification reducing bilateral obligations into minimal payments" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#onRecordPayment" styleClass="btn-primary" text="Record payment" />
+        </HBox>
+
+        <!-- Accounting Scope Card & Metric Panels Grid -->
+        <HBox spacing="16.0">
+            <!-- Left: Scope Selector Card (Width 320px) -->
+            <VBox prefWidth="320.0" spacing="12.0" styleClass="card">
+                <Label styleClass="form-label" text="ACCOUNTING SCOPE" />
+                <ComboBox fx:id="scopeGroupComboBox" maxWidth="1.7976931348623157E308" />
+
+                <VBox spacing="4.0" styleClass="card-subtle">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label styleClass="text-caption" text="Graph Simplification:" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label styleClass="badge, badge-positive" text="Greedy flow" />
+                    </HBox>
+                    <Label fx:id="graphCompressionLabel" styleClass="text-caption" text="Bilateral debts compressed into minimal multi-party transfers." wrapText="true" />
+                </VBox>
+            </VBox>
+
+            <!-- Right: Metric Panels Strip -->
+            <HBox spacing="16.0" HBox.hgrow="ALWAYS">
+                <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="text-caption" text="TOTAL RESIDUAL" />
+                    <Label fx:id="totalResidualLabel" styleClass="text-mono-large" text="₹0.00" />
+                    <Label fx:id="pendingTransfersCountLabel" styleClass="text-caption" text="0 pending transfers" />
+                </VBox>
+
+                <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="text-caption" text="YOU RECEIVE" />
+                    <Label fx:id="youReceiveLabel" styleClass="text-mono-large, text-positive" text="+₹0.00" />
+                    <Label styleClass="text-caption" text="Incoming credits" />
+                </VBox>
+
+                <VBox spacing="8.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label styleClass="text-caption" text="YOU OWE" />
+                    <Label fx:id="youOweLabel" styleClass="text-mono-large, text-negative" text="-₹0.00" />
+                    <Label styleClass="text-caption" text="Pending debits" />
+                </VBox>
+            </HBox>
+        </HBox>
+
+        <!-- Suggested Settlements Section -->
+        <VBox spacing="16.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Label styleClass="text-section" text="Suggested settlements" />
+                <Label fx:id="settlementsCountBadge" styleClass="badge, badge-neutral" text="0 transactions" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label styleClass="text-caption" text="Optimal settlement network" />
+            </HBox>
+
+            <!-- Settlements List -->
+            <VBox fx:id="settlementListContainer" spacing="12.0" />
+
+            <!-- Empty state when zero debts -->
+            <VBox fx:id="allSettledBox" alignment="CENTER" managed="false" spacing="12.0" styleClass="card" visible="false">
+                <padding>
+                    <Insets bottom="32.0" top="32.0" />
+                </padding>
+                <Label styleClass="text-section, text-positive" text="All balances settled" />
+                <Label styleClass="text-secondary" text="Everyone is squared up. No transfers needed." />
+            </VBox>
+        </VBox>
+    </VBox>
+</ScrollPane>
+

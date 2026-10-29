@@ -1,0 +1,442 @@
+/* Ledger Calm Component Styling */
+
+/* Base Root & Global Typography */
+.root {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-background-color: -color-page;
+    -fx-text-fill: -color-text-primary;
+}
+
+/* Typography Utility Classes */
+.text-title {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.text-section {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.text-label {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.text-body {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: -color-text-primary;
+}
+
+.text-secondary {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.text-caption {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-secondary;
+}
+
+.text-mono {
+    -fx-font-family: -font-mono;
+    -fx-font-size: 14px;
+}
+
+.text-mono-large {
+    -fx-font-family: -font-mono;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.text-positive {
+    -fx-font-family: -font-mono;
+    -fx-text-fill: -color-positive;
+    -fx-font-weight: bold;
+}
+
+.text-negative {
+    -fx-font-family: -font-mono;
+    -fx-text-fill: -color-negative;
+    -fx-font-weight: bold;
+}
+
+.text-warning {
+    -fx-text-fill: -color-warning;
+}
+
+/* Structural Components */
+
+/* Sidebar Navigation */
+.app-sidebar {
+    -fx-min-width: 240px;
+    -fx-pref-width: 240px;
+    -fx-max-width: 240px;
+    -fx-background-color: -color-surface;
+    -fx-border-color: transparent -color-border transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+}
+
+.sidebar-header {
+    -fx-pref-height: 56px;
+    -fx-padding: 0 24px;
+    -fx-alignment: center-left;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.sidebar-title {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.sidebar-nav-item {
+    -fx-pref-height: 40px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 8px;
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+}
+
+.sidebar-nav-item:hover {
+    -fx-background-color: -color-surface-subtle;
+    -fx-text-fill: -color-text-primary;
+}
+
+.sidebar-nav-item.active {
+    -fx-background-color: -color-nav-active;
+    -fx-text-fill: -color-text-primary;
+    -fx-font-weight: bold;
+}
+
+.sidebar-user-card {
+    -fx-padding: 16px;
+    -fx-border-color: -color-border transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+    -fx-alignment: center-left;
+}
+
+/* Header Bar */
+.app-header {
+    -fx-pref-height: 56px;
+    -fx-padding: 0 32px;
+    -fx-background-color: -color-surface;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-alignment: center-right;
+}
+
+/* Cards */
+.card {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+}
+
+.card-subtle {
+    -fx-background-color: -color-surface-subtle;
+    -fx-border-color: -color-border-subtle;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 16px;
+}
+
+/* Metric Strip */
+.metric-strip {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.metric-cell {
+    -fx-padding: 20px 24px;
+    -fx-border-color: transparent -color-border transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+}
+
+.metric-cell:last-child {
+    -fx-border-width: 0;
+}
+
+/* Buttons */
+.button {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-pref-height: 36px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 0 16px;
+    -fx-alignment: center;
+}
+
+.button:focused {
+    -fx-border-color: -color-focus-ring;
+    -fx-border-width: 2px;
+}
+
+.btn-primary {
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-on-accent;
+    -fx-font-weight: bold;
+    -fx-border-width: 0;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -color-accent-hover;
+}
+
+.btn-primary:pressed {
+    -fx-background-color: -color-accent-pressed;
+}
+
+.btn-secondary {
+    -fx-background-color: -color-surface;
+    -fx-text-fill: -color-text-primary;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -color-surface-subtle;
+}
+
+.btn-secondary:pressed {
+    -fx-background-color: -color-nav-active;
+}
+
+.btn-tertiary {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-secondary;
+    -fx-border-width: 0;
+}
+
+.btn-tertiary:hover {
+    -fx-background-color: -color-surface-subtle;
+    -fx-text-fill: -color-text-primary;
+}
+
+.btn-icon {
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+    -fx-padding: 0;
+    -fx-alignment: center;
+}
+
+/* Input Fields & Form Controls */
+.text-field, .password-field, .combo-box, .date-picker {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-pref-height: 36px;
+    -fx-background-color: -color-surface;
+    -fx-text-fill: -color-text-primary;
+    -fx-prompt-text-fill: -color-text-muted;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 12px;
+}
+
+.text-field:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: -color-focus-ring;
+    -fx-border-width: 2px;
+}
+
+.text-field.field-error {
+    -fx-border-color: -color-negative;
+    -fx-border-width: 1px;
+}
+
+.field-error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-negative;
+}
+
+.form-label {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+.form-group {
+    -fx-spacing: 6px;
+}
+
+/* Tabular & Ledger Tables */
+.table-view {
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -color-surface-subtle;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-border-width: 0;
+    -fx-padding: 0 16px;
+}
+
+.table-view .column-header .label {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-secondary;
+    -fx-alignment: center-left;
+}
+
+.table-row-cell {
+    -fx-background-color: -color-surface;
+    -fx-border-color: transparent transparent -color-border-subtle transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-pref-height: 44px;
+    -fx-cell-size: 44px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: -color-row-hover;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -color-accent-subtle;
+}
+
+.table-cell {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 14px;
+    -fx-text-fill: -color-text-primary;
+    -fx-alignment: center-left;
+    -fx-padding: 0 16px;
+}
+
+.table-cell-mono {
+    -fx-font-family: -font-mono;
+    -fx-alignment: center-right;
+}
+
+/* Badges & Status Pills */
+.badge {
+    -fx-background-radius: 9999px;
+    -fx-padding: 2px 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.badge-positive {
+    -fx-background-color: -color-positive-subtle;
+    -fx-text-fill: -color-positive;
+}
+
+.badge-negative {
+    -fx-background-color: -color-negative-subtle;
+    -fx-text-fill: -color-negative;
+}
+
+.badge-neutral {
+    -fx-background-color: -color-surface-subtle;
+    -fx-text-fill: -color-text-secondary;
+}
+
+/* Avatars */
+.avatar-circle {
+    -fx-pref-width: 32px;
+    -fx-pref-height: 32px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-background-color: -color-surface-subtle;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-background-radius: 9999px;
+    -fx-border-radius: 9999px;
+    -fx-alignment: center;
+}
+
+.avatar-initials {
+    -fx-font-family: -font-sans;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-primary;
+}
+
+/* Modal Dialog Card */
+.modal-dialog {
+    -fx-pref-width: 520px;
+    -fx-max-width: 520px;
+    -fx-background-color: -color-surface;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 16, 0, 0, 4);
+}
+
+.modal-header {
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 0 0 16px 0;
+}
+
+.modal-footer {
+    -fx-border-color: -color-border transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+    -fx-padding: 16px 0 0 0;
+    -fx-alignment: center-right;
+}
+
+/* Segmented Button Control */
+.segmented-control {
+    -fx-background-color: -color-surface-subtle;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 2px;
+}
+
+.segmented-control .button {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: -color-text-secondary;
+    -fx-background-radius: 6px;
+    -fx-pref-height: 32px;
+}
+
+.segmented-control .button.active {
+    -fx-background-color: -color-accent;
+    -fx-text-fill: -color-on-accent;
+    -fx-font-weight: bold;
+}

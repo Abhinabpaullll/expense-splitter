@@ -1,0 +1,68 @@
+/* Ledger Calm Design System - Light Theme Tokens */
+.root {
+    -color-page: #F7F7F5;
+    -color-surface: #FFFFFF;
+    -color-surface-subtle: #F2F2EE;
+    -color-border: #E2E2DC;
+    -color-border-subtle: #ECECE6;
+    
+    -color-text-primary: #1A1D1F;
+    -color-text-secondary: #5B6166;
+    -color-text-muted: #848A90;
+    
+    -color-accent: #1B6B5A;
+    -color-accent-hover: #155547;
+    -color-accent-pressed: #0F3F34;
+    -color-accent-subtle: #E8F3F0;
+    -color-on-accent: #FFFFFF;
+    
+    -color-positive: #1E6B3A;
+    -color-positive-subtle: #E8F5EE;
+    -color-negative: #A62A2A;
+    -color-negative-subtle: #FDF0F0;
+    -color-warning: #8A5A00;
+    -color-warning-subtle: #FFF8E6;
+    
+    -color-row-hover: #F5F5F2;
+    -color-nav-active: #EAEAE4;
+    -color-focus-ring: #1B6B5A;
+
+    /* Base Font families */
+    -font-sans: "IBM Plex Sans";
+    -font-mono: "IBM Plex Mono";
+
+    /* Typography Scale */
+    -font-size-caption: 12px;
+    -font-size-body: 14px;
+    -font-size-label: 16px;
+    -font-size-section: 20px;
+    -font-size-title: 28px;
+
+    /* Spacing 4px scale */
+    -space-4: 4px;
+    -space-8: 8px;
+    -space-12: 12px;
+    -space-16: 16px;
+    -space-24: 24px;
+    -space-32: 32px;
+    -space-48: 48px;
+
+    /* Corner radius */
+    -radius-sm: 4px;
+    -radius-card: 8px;
+    -radius-btn: 8px;
+    -radius-input: 8px;
+    -radius-full: 9999px;
+
+    /* Standard Heights */
+    -height-control: 36px;
+    -height-table-row: 44px;
+
+    /* AtlantaFX control overrides */
+    -fx-base: -color-page;
+    -fx-background: -color-page;
+    -fx-accent: -color-accent;
+    -fx-focus-color: -color-accent;
+    -fx-faint-focus-color: transparent;
+}
+

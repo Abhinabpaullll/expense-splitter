@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="520.0" spacing="16.0" styleClass="modal-dialog"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.expensesplitter.controller.AddExpenseController">
+
+    <!-- Modal Header -->
+    <HBox alignment="CENTER_LEFT" styleClass="modal-header">
+        <VBox spacing="2.0">
+            <Label styleClass="text-section" text="Add expense" />
+            <Label styleClass="text-caption" text="Enter transaction details and distribution rules" />
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#onClose" styleClass="btn-icon, btn-tertiary" text="✕" />
+    </HBox>
+
+    <!-- Form Fields Container -->
+    <VBox spacing="14.0">
+        <!-- Title / Description -->
+        <VBox spacing="6.0">
+            <Label styleClass="form-label" text="Description / Title" />
+            <TextField fx:id="titleField" promptText="e.g. Electricity bill, Grocery restock" />
+        </VBox>
+
+        <!-- 2-Column: Amount & Date -->
+        <HBox spacing="16.0">
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label styleClass="form-label" text="Amount" />
+                <TextField fx:id="amountField" promptText="0.00" styleClass="text-mono" />
+            </VBox>
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label styleClass="form-label" text="Date" />
+                <DatePicker fx:id="datePicker" maxWidth="1.7976931348623157E308" />
+            </VBox>
+        </HBox>
+
+        <!-- 2-Column: Group & Paid By -->
+        <HBox spacing="16.0">
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label styleClass="form-label" text="Group" />
+                <ComboBox fx:id="groupComboBox" maxWidth="1.7976931348623157E308" />
+            </VBox>
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label styleClass="form-label" text="Paid by" />
+                <ComboBox fx:id="payerComboBox" maxWidth="1.7976931348623157E308" />
+            </VBox>
+        </HBox>
+
+        <!-- Category & Notes -->
+        <HBox spacing="16.0">
+            <VBox spacing="6.0" prefWidth="220.0">
+                <Label styleClass="form-label" text="Category" />
+                <ComboBox fx:id="categoryComboBox" maxWidth="1.7976931348623157E308" />
+            </VBox>
+            <VBox spacing="6.0" HBox.hgrow="ALWAYS">
+                <Label styleClass="form-label" text="Notes (Optional)" />
+                <TextField fx:id="notesField" promptText="e.g. Supermarket receipt" />
+            </VBox>
+        </HBox>
+
+        <!-- Split Method Segmented Control -->
+        <VBox spacing="8.0">
+            <Label styleClass="form-label" text="Split method" />
+            <HBox styleClass="segmented-control">
+                <Button fx:id="splitEqualBtn" maxWidth="1.7976931348623157E308" onAction="#onSelectEqual" styleClass="active" text="Equal" HBox.hgrow="ALWAYS" />
+                <Button fx:id="splitExactBtn" maxWidth="1.7976931348623157E308" onAction="#onSelectExact" text="Exact" HBox.hgrow="ALWAYS" />
+                <Button fx:id="splitPercentBtn" maxWidth="1.7976931348623157E308" onAction="#onSelectPercent" text="Percent" HBox.hgrow="ALWAYS" />
+                <Button fx:id="splitSharesBtn" maxWidth="1.7976931348623157E308" onAction="#onSelectShares" text="Shares" HBox.hgrow="ALWAYS" />
+            </HBox>
+        </VBox>
+
+        <!-- Member Allocation Ledger List -->
+        <VBox spacing="6.0">
+            <Label styleClass="text-caption" text="ALLOCATION LEDGER" />
+            <ScrollPane fitToWidth="true" maxHeight="180.0" prefHeight="140.0" style="-fx-background-color: transparent;">
+                <VBox fx:id="memberAllocationContainer" spacing="6.0" />
+            </ScrollPane>
+        </VBox>
+
+        <!-- Running Total Verification Status Bar -->
+        <VBox fx:id="verificationBar" spacing="6.0" styleClass="card-subtle">
+            <HBox alignment="CENTER_LEFT">
+                <Label fx:id="verificationStatusLabel" styleClass="text-label" text="Balanced distribution" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="verificationSummaryLabel" styleClass="text-mono" text="Total split: 0.00 of 0.00" />
+            </HBox>
+            <ProgressBar fx:id="splitProgressBar" maxWidth="1.7976931348623157E308" prefHeight="4.0" progress="1.0" />
+            <Label fx:id="discrepancyErrorLabel" managed="false" styleClass="field-error-label" text="Discrepancy detected: Allocation must equal total" visible="false" />
+        </VBox>
+    </VBox>
+
+    <!-- Dialog Footer Actions -->
+    <HBox alignment="CENTER_RIGHT" spacing="12.0" styleClass="modal-footer">
+        <Button onAction="#onClose" styleClass="btn-secondary" text="Cancel" />
+        <Button fx:id="saveExpenseBtn" onAction="#onSaveExpense" styleClass="btn-primary" text="Save expense" />
+    </HBox>
+</VBox>
+

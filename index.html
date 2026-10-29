@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Splitter — Ledger Calm Accounting</title>
+  <meta name="description" content="Precision shared financial accounting, cost settlement and ledger workflows. Built with Stitch MCP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#005243",
+        "primary-container": "#1b6b5a",
+        "on-primary": "#ffffff",
+        "on-primary-container": "#9ee9d3",
+        "primary-fixed": "#a6f1db",
+        "primary-fixed-dim": "#8bd5c0",
+        "on-primary-fixed": "#002019",
+        "on-primary-fixed-variant": "#005142",
+        "inverse-primary": "#8bd5c0",
+        "secondary": "#595f64",
+        "secondary-container": "#dbe0e6",
+        "on-secondary": "#ffffff",
+        "on-secondary-container": "#5d6368",
+        "secondary-fixed": "#dee3e9",
+        "secondary-fixed-dim": "#c1c7cd",
+        "on-secondary-fixed": "#161c21",
+        "on-secondary-fixed-variant": "#41474c",
+        "tertiary": "#005427",
+        "tertiary-container": "#206d3c",
+        "on-tertiary": "#ffffff",
+        "on-tertiary-container": "#9fecae",
+        "tertiary-fixed": "#a6f4b6",
+        "tertiary-fixed-dim": "#8bd79b",
+        "on-tertiary-fixed": "#00210c",
+        "on-tertiary-fixed-variant": "#005227",
+        "error": "#ba1a1a",
+        "error-container": "#ffdad6",
+        "on-error": "#ffffff",
+        "on-error-container": "#93000a",
+        "surface": "#f8f9fc",
+        "surface-dim": "#d8dadd",
+        "surface-bright": "#f8f9fc",
+        "surface-variant": "#e1e2e5",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f2f4f6",
+        "surface-container": "#eceef0",
+        "surface-container-high": "#e7e8eb",
+        "surface-container-highest": "#e1e2e5",
+        "surface-tint": "#1a6a59",
+        "background": "#f8f9fc",
+        "on-background": "#191c1e",
+        "on-surface": "#191c1e",
+        "on-surface-variant": "#3f4945",
+        "inverse-surface": "#2e3133",
+        "inverse-on-surface": "#eff1f3",
+        "outline": "#6f7975",
+        "outline-variant": "#bec9c4"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-xs": "0.25rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "space-lg": "1.5rem",
+        "space-xl": "2rem",
+        "gutter": "1rem",
+        "margin": "1.5rem"
+      },
+      fontFamily: {
+        "page-title": ["IBM Plex Sans", "sans-serif"],
+        "section-heading": ["IBM Plex Sans", "sans-serif"],
+        "body-default": ["IBM Plex Sans", "sans-serif"],
+        "label-lg": ["IBM Plex Sans", "sans-serif"],
+        "label-md": ["IBM Plex Sans", "sans-serif"],
+        "caption": ["IBM Plex Sans", "sans-serif"],
+        "caption-medium": ["IBM Plex Sans", "sans-serif"],
+        "tabular-summary": ["Space Mono", "monospace"],
+        "tabular-header": ["Space Mono", "monospace"],
+        "tabular-body": ["Space Mono", "monospace"]
+      },
+      fontSize: {
+        "page-title": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "section-heading": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "label-lg": ["16px", { lineHeight: "24px", fontWeight: "500" }],
+        "label-md": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+        "body-default": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        "caption-medium": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+        "caption": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+        "tabular-summary": ["16px", { lineHeight: "24px", fontWeight: "600" }],
+        "tabular-header": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+        "tabular-body": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+      }
+    }
+  }
+};
+</script>
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: 'IBM Plex Sans', sans-serif; }
+      body { overscroll-behavior: none; }
+      ::-webkit-scrollbar { width: 6px; height: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(111, 121, 117, 0.2); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(111, 121, 117, 0.4); }
+    }
+    .dark body { background-color: #14171a !important; color: #eceeef !important; }
+    .dark aside, .dark header { background-color: #1c2024 !important; border-color: #2e343a !important; }
+    .dark .bg-surface { background-color: #14171a !important; }
+    .dark .bg-surface-container-lowest { background-color: #1c2024 !important; }
+    .dark .bg-surface-container-low { background-color: #22272c !important; }
+    .dark .bg-surface-container { background-color: #282e34 !important; }
+    .dark .bg-surface-container-high { background-color: #31373e !important; }
+    .dark .border-outline-variant { border-color: #2e343a !important; }
+    .dark .text-on-surface { color: #eceeef !important; }
+    .dark .text-secondary { color: #a8b0b6 !important; }
+    .dark .text-on-surface-variant { color: #a8b0b6 !important; }
+    .dark input, .dark select { background-color: #22272c !important; color: #eceeef !important; border-color: #2e343a !important; }
+
+    @media print {
+      aside, header, #modal-add-expense, #record-modal, .no-print { display: none !important; }
+      .pl-\[240px\] { padding-left: 0 !important; }
+      main { padding-top: 0 !important; }
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-default text-body-default text-on-surface antialiased min-h-screen">
+
+  <!-- Left Sidebar Navigation (240px locked as per design system) -->
+  <aside class="fixed left-0 top-0 bottom-0 w-[240px] bg-surface border-r border-outline-variant z-30 flex flex-col justify-between select-none">
+    <div class="flex flex-col">
+      <!-- App Brand Title Bar -->
+      <div class="h-14 px-space-lg flex items-center justify-between border-b border-outline-variant">
+        <a href="#dashboard" class="flex items-center gap-2 text-on-surface hover:opacity-85 transition-opacity">
+          <span class="w-6 h-6 rounded-md bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">₹</span>
+          <span class="font-label-lg text-label-lg font-semibold tracking-tight">Expense Splitter</span>
+        </a>
+        <span class="text-[10px] uppercase font-tabular-header px-1.5 py-0.5 rounded bg-surface-container text-secondary">PRO</span>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-space-sm flex flex-col gap-1" id="main-nav">
+        <a href="#dashboard" onclick="navigate('dashboard'); return false;" data-view="dashboard" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg transition-colors bg-surface-container-high text-on-surface font-semibold cursor-pointer">
+          <span class="material-symbols-outlined text-[20px] text-primary">dashboard</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#groups" onclick="navigate('groups'); return false;" data-view="groups" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">group</span>
+          <span>Groups</span>
+        </a>
+        <a href="#settle-up" onclick="navigate('settle-up'); return false;" data-view="settle-up" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">handshake</span>
+          <span>Settle Up</span>
+        </a>
+        <a href="#reminders" onclick="navigate('reminders'); return false;" data-view="reminders" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="flex-1">Reminders</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[11px] font-tabular-header bg-error/15 text-error font-medium" id="sidebar-reminder-count">0</span>
+        </a>
+        <a href="#reports" onclick="navigate('reports'); return false;" data-view="reports" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">description</span>
+          <span>Reports</span>
+        </a>
+        <a href="#settings" onclick="navigate('settings'); return false;" data-view="settings" class="nav-item flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Active User Footer Profile -->
+    <div class="p-space-md border-t border-outline-variant flex items-center justify-between gap-3 bg-surface-container-low/50">
+      <div onclick="openAuthModal()" class="flex items-center gap-3 min-w-0 cursor-pointer group" title="Click to Switch Account or Sign In">
+        <div id="sidebar-user-avatar" class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 border border-outline-variant font-label-md text-xs font-semibold group-hover:ring-2 group-hover:ring-primary transition-all">
+          --
+        </div>
+        <div class="flex flex-col min-w-0">
+          <span id="sidebar-user-name" class="font-label-md text-label-md text-on-surface truncate font-medium group-hover:text-primary transition-colors">Sign In</span>
+          <span id="sidebar-user-email" class="font-caption text-caption text-secondary truncate">Click to authenticate</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <button onclick="openAuthModal()" title="Switch or Add Account" class="w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center text-secondary hover:text-primary transition-colors" type="button">
+          <span class="material-symbols-outlined text-[18px]">switch_account</span>
+        </button>
+        <button onclick="navigate('settings')" title="User Preferences" class="w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center text-secondary transition-colors" type="button">
+          <span class="material-symbols-outlined text-[18px]">tune</span>
+        </button>
+        <button id="btn-sign-out" title="Sign Out" class="hidden w-7 h-7 rounded-lg hover:bg-surface-container flex items-center justify-center text-secondary hover:text-error transition-colors" type="button">
+          <span class="material-symbols-outlined text-[18px]">logout</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content Canvas Area (Shifted by 240px) -->
+  <div class="pl-[240px] flex flex-col min-h-screen">
+    <!-- Top Utility Header Bar -->
+    <header class="fixed top-0 left-[240px] right-0 h-14 bg-surface/90 backdrop-blur-md border-b border-outline-variant z-20 flex items-center justify-between px-space-xl gap-3">
+      <!-- Breadcrumb indicator -->
+      <div class="flex items-center gap-2 text-secondary font-label-md text-label-md">
+        <span class="material-symbols-outlined text-[18px] text-primary">account_balance</span>
+        <span id="header-breadcrumb" class="text-on-surface font-medium">Ledger Calm</span>
+        <span class="text-outline-variant">•</span>
+        <span class="text-xs uppercase font-tabular-header text-secondary tracking-wider" id="header-scope">Live Ledger</span>
+      </div>
+
+      <!-- Action Tools -->
+      <div class="flex items-center gap-2.5">
+        <!-- New Group Header Button -->
+        <button onclick="openNewGroupModal()" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-xs font-medium inline-flex items-center gap-1.5 transition-colors border border-outline-variant/50" type="button" title="Create a new shared ledger group">
+          <span class="material-symbols-outlined text-[16px] text-primary">group_add</span>
+          <span>New Group</span>
+        </button>
+
+        <!-- Add Expense Header Button -->
+        <button onclick="openAddExpenseModal()" class="h-8 px-3 rounded-lg bg-primary text-on-primary font-label-md text-xs font-medium inline-flex items-center gap-1.5 hover:bg-primary-container transition-all shadow-sm" type="button">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          <span>Add Expense</span>
+        </button>
+
+        <div class="h-4 w-[1px] bg-outline-variant mx-1"></div>
+
+        <button onclick="toggleQuickSearch()" title="Search transactions (Ctrl+K)" class="flex items-center justify-center w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </button>
+        <button onclick="toggleTheme()" title="Toggle Light / Dark mode" class="flex items-center justify-center w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]" id="theme-toggle-icon">dark_mode</span>
+        </button>
+        <button onclick="navigate('reminders')" title="Pending notices" class="relative flex items-center justify-center w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error"></span>
+        </button>
+        <button onclick="navigate('settings')" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 ml-1 text-on-primary" type="button">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Viewport Router Views -->
+    <main class="pt-14 flex-1">
+      <!-- VIEW: DASHBOARD -->
+      <div id="view-dashboard" class="app-view">
+        <div class="w-full max-w-[1120px] p-space-xl"><div class="w-full flex items-center justify-between pb-space-lg mb-space-lg border-b border-outline-variant"><div class="flex items-center gap-3"><h1 class="font-page-title text-page-title text-on-surface">Ledger Overview</h1></div><div class="flex items-center gap-3"><button class="h-[36px] px-4 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md inline-flex items-center gap-2 hover:brightness-90 transition-all" type="button"><span class="material-symbols-outlined text-[18px]">add</span><span class="">Add Expense</span></button></div></div><div class="flex flex-col w-full">
+<!-- Top Consolidated Metric Strip -->
+<div class="w-full bg-surface-container-lowest rounded-lg shadow-sm mb-space-xl overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-surface-container">
+<!-- Metric 1: You are owed -->
+<div class="p-space-lg flex flex-col justify-between bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">You are owed</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span id="metric-owed" class="font-tabular-summary text-2xl font-semibold tracking-tight text-tertiary font-tabular-header">+₹0.00</span>
+<span id="metric-owed-count" class="font-caption text-caption text-secondary">0 active credits</span>
+</div>
+</div>
+<!-- Metric 2: You owe -->
+<div class="p-space-lg flex flex-col justify-between bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">You owe</span>
+<span class="w-2 h-2 rounded-full bg-error"></span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span id="metric-owe" class="font-tabular-summary text-2xl font-semibold tracking-tight text-error font-tabular-header">-₹0.00</span>
+<span id="metric-owe-count" class="font-caption text-caption text-secondary">0 pending debits</span>
+</div>
+</div>
+<!-- Metric 3: Net balance -->
+<div class="p-space-lg flex flex-col justify-between bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Net balance</span>
+<span id="metric-net-status" class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-tertiary-fixed text-on-tertiary-fixed">Balanced</span>
+</div>
+<div class="flex items-baseline justify-between mt-space-xs">
+<span id="metric-net" class="font-tabular-summary text-2xl font-semibold tracking-tight text-tertiary font-tabular-header">₹0.00</span>
+<span id="metric-net-label" class="font-caption text-caption text-secondary">No settlements pending</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Register & Analysis Split -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Primary Register Activity Column (720px equivalent at 1120px canvas) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Table Header & Controller Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-section-heading text-section-heading text-on-surface">Recent activity</h2>
+<p class="font-caption text-caption text-secondary">Latest ledger postings across shared ledgers</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined text-[18px] text-secondary absolute left-2.5 pointer-events-none">search</span>
+<input class="h-[36px] pl-8 pr-3 bg-surface-container-lowest rounded-lg font-body-default text-body-default text-on-surface placeholder:text-secondary focus:outline-none focus:bg-surface-container-low w-[170px] sm:w-[210px] transition-colors" id="ledger-search-input" placeholder="Filter expenses..." type="text">
+</div>
+<div class="relative">
+<button class="h-[36px] px-3 bg-surface-container-lowest hover:bg-surface-container-low text-on-surface rounded-lg font-label-md text-label-md inline-flex items-center gap-1.5 transition-colors" id="sort-menu-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">swap_vert</span>
+<span class="">Date</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dense Table Container -->
+<div class="w-full bg-surface-container-lowest rounded-lg shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full border-collapse text-left" id="ledger-table">
+<thead>
+<tr class="h-[44px] bg-surface-container-low text-secondary font-tabular-header text-tabular-header tracking-wider uppercase select-none">
+<th class="px-space-md font-medium">Date</th>
+<th class="px-space-md font-medium">Description</th>
+<th class="px-space-md font-medium">Group</th>
+<th class="px-space-md font-medium">Paid by</th>
+<th class="px-space-md font-medium text-right">Your share</th>
+<th class="px-space-md font-medium text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-default text-body-default">
+</tbody>
+</table>
+</div>
+<!-- Table Micro Footer -->
+<div class="h-10 px-space-md bg-surface-container-low flex items-center justify-between">
+<span id="ledger-footer-count" class="font-caption text-caption text-secondary">Showing 0 records</span>
+<a class="font-caption-medium text-caption-medium text-primary hover:underline flex items-center gap-1" href="#groups" onclick="navigate('groups')">
+<span class="">View all groups</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Secondary Spending Breakdown Column (368px equivalent) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-section-heading text-section-heading text-on-surface">Spending by category</h2>
+<p class="font-caption text-caption text-secondary">Current cycle distribution</p>
+</div>
+<span class="font-caption-medium text-caption-medium text-secondary">Overview</span>
+</div>
+<!-- Distribution Card -->
+<div class="w-full bg-surface-container-lowest rounded-lg shadow-sm p-space-lg flex flex-col gap-space-lg">
+<!-- Total Outlay Header in Card -->
+<div class="flex items-baseline justify-between pb-space-sm border-b border-surface-container-low">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Total Ledger Expense</span>
+<span id="category-total" class="font-tabular-summary text-tabular-summary font-semibold text-on-surface font-tabular-header">₹0.00</span>
+</div>
+<!-- Inline Visual Composite Stacked Segment -->
+<div class="w-full flex flex-col gap-2">
+<div id="category-stack" class="w-full h-3 rounded-full bg-surface-container-high overflow-hidden flex">
+</div>
+<div class="flex items-center justify-between text-[11px] font-caption text-secondary">
+<span id="category-primary-label">No expenses recorded yet</span>
+</div>
+</div>
+<!-- Horizontal Bars Detailed List -->
+<div id="category-chart-bars" class="flex flex-col gap-space-md">
+<p class="text-caption text-secondary py-2 text-center">Add expenses to view category breakdown.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+      <!-- VIEW: GROUPS -->
+      <div id="view-groups" class="app-view hidden">
+        <div class="w-full max-w-[1120px] p-space-xl">
+          <div class="flex flex-col w-full">
+<div class="w-full flex items-center justify-between pb-space-lg mb-space-lg">
+<div class="flex items-baseline gap-space-sm">
+<h2 class="font-page-title text-page-title text-on-surface">Groups</h2>
+<span class="font-caption-medium text-caption-medium text-secondary tracking-widest uppercase">/ Active Registers</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button id="btn-new-group" onclick="openNewGroupModal()" class="h-[36px] px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md inline-flex items-center gap-2 transition-all shadow-sm select-none cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">group_add</span>
+<span class="font-medium">New group</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md mb-space-lg">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Active Entities</span>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span id="groups-stat-active" class="font-tabular-summary text-tabular-summary text-on-surface">0</span>
+<span id="groups-stat-total" class="font-caption text-caption text-secondary">of 0 total</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Gross Turnover</span>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span id="groups-stat-turnover" class="font-tabular-summary text-tabular-summary text-on-surface">₹0.00</span>
+<span class="font-caption text-caption text-secondary">Shared ledger</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Net Position</span>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span id="groups-stat-net" class="font-tabular-summary text-tabular-summary text-tertiary-container">₹0.00</span>
+<span class="font-caption-medium text-caption-medium text-tertiary-container">Balance</span>
+</div>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Outstanding Debits</span>
+<div class="mt-space-sm flex items-baseline justify-between">
+<span id="groups-stat-owe" class="font-tabular-summary text-tabular-summary text-error">-₹0.00</span>
+<span class="font-caption-medium text-caption-medium text-error">Payable</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm flex-1 max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-secondary pointer-events-none">search</span>
+<input class="w-full h-[36px] pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface placeholder:text-secondary font-body-default text-body-default outline-none focus:bg-surface-container-lowest transition-colors" id="group-search-input" placeholder="Filter groups by name or participant..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end sm:self-auto">
+<button class="h-[36px] w-[36px] rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary flex items-center justify-center transition-colors" title="Table options" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+</div>
+<div class="w-full rounded-lg bg-surface-container-lowest overflow-hidden">
+<div class="w-full overflow-x-auto">
+<table class="w-full border-collapse text-left" id="groups-table">
+<thead class="bg-surface-container-low sticky top-0 z-10 select-none">
+<tr class="h-[44px]">
+<th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Group name</th>
+<th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Members</th>
+<th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider text-right">Total spent</th>
+<th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider text-right">Your balance</th>
+<th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low">
+</tbody>
+</table>
+</div>
+<div class="h-[44px] px-space-md bg-surface-container-low flex items-center justify-between">
+<span class="font-caption text-caption text-secondary">Summary of active groups</span>
+<div class="flex items-center gap-space-lg">
+<span class="font-tabular-body text-tabular-body text-secondary">Aggregate: <strong id="groups-footer-aggregate" class="text-on-surface font-semibold">₹0.00</strong></span>
+<span class="font-tabular-body text-tabular-body text-secondary">Net: <strong id="groups-footer-net" class="text-tertiary-container font-semibold">₹0.00</strong></span>
+</div>
+</div>
+</div>
+<div class="w-full mt-space-xl p-space-lg rounded-lg bg-surface-container-low flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[20px]">archive</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-section-heading text-section-heading text-on-surface leading-tight">No archived groups</h3>
+<p class="font-body-default text-body-default text-secondary">Groups you archive will appear here for record keeping.</p>
+</div>
+</div>
+<button class="h-[36px] px-space-md rounded-lg bg-surface-container-highest hover:bg-surface-variant text-on-surface font-label-md text-label-md inline-flex items-center gap-2 transition-colors self-end sm:self-auto shrink-0 select-none" type="button">
+<span class="">Learn more about archiving</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+      </div>
+
+      <!-- VIEW: GROUP-DETAIL -->
+      <div id="view-group-detail" class="app-view hidden">
+        <div class="w-full max-w-[1120px] p-space-xl">
+          <div class="flex items-center gap-2 mb-space-sm">
+            <a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" onclick="navigate('groups')">
+              <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+              <span>Back to Groups</span>
+            </a>
+          </div>
+          <div class="flex items-start justify-between mb-space-lg">
+            <div class="flex flex-col gap-1">
+              <h2 id="group-detail-name" class="font-page-title text-page-title text-on-surface font-semibold tracking-tight">Group Details</h2>
+              <div id="group-detail-members-summary" class="flex items-center gap-2 text-secondary text-sm">
+                Select a group to see members and expenses
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm">
+              <button onclick="openRecordModal()" class="h-[36px] px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md inline-flex items-center gap-1.5 transition-colors" type="button">
+                <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+                <span>Settle up</span>
+              </button>
+              <button onclick="openAddExpenseModal()" class="h-[36px] px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md inline-flex items-center gap-1.5 hover:brightness-90 transition-all" type="button">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                <span>Add expense</span>
+              </button>
+            </div>
+          </div>
+          <!-- Structural Tab Navigation -->
+          <div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-lg w-fit mb-space-lg">
+            <button class="px-3.5 py-1.5 rounded-md font-label-md text-label-md bg-surface-container-lowest text-on-surface font-semibold shadow-sm transition-all flex items-center gap-2" id="tab-expenses-btn" onclick="switchGroupTab('expenses')" type="button">
+              <span>Expenses</span>
+            </button>
+            <button class="px-3.5 py-1.5 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2" id="tab-members-btn" onclick="switchGroupTab('members')" type="button">
+              <span>Members</span>
+            </button>
+          </div>
+          <div class="grid grid-cols-12 gap-space-lg items-start">
+            <div class="col-span-12 lg:col-span-8 flex flex-col gap-space-md" id="expenses-tab-content">
+              <div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border-collapse" id="group-detail-expenses">
+                    <thead>
+                      <tr class="h-[44px] bg-surface-container-low font-tabular-header text-tabular-header text-on-surface-variant uppercase tracking-wider">
+                        <th class="px-space-md font-medium">Date</th>
+                        <th class="px-space-md font-medium">Description</th>
+                        <th class="px-space-md font-medium">Paid by</th>
+                        <th class="px-space-md font-medium text-right">Amount</th>
+                        <th class="px-space-md font-medium text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-container">
+                      <tr><td colspan="5" class="px-space-md py-6 text-center text-secondary">No group selected.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 lg:col-span-4 flex flex-col gap-space-md">
+              <div class="p-space-lg bg-surface-container-lowest rounded-xl flex flex-col gap-space-md shadow-sm">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-section-heading text-section-heading text-on-surface font-semibold">Group Members</h3>
+                  <button id="btn-add-member-trigger" onclick="openAddMemberModal()" class="px-2.5 py-1 rounded-md bg-surface-container hover:bg-surface-container-high text-primary font-medium text-xs flex items-center gap-1 transition-colors" type="button">
+                    <span class="material-symbols-outlined text-[16px]">person_add</span>
+                    <span>Add Member</span>
+                  </button>
+                </div>
+                <div id="group-detail-members" class="flex flex-col gap-2">
+                  <p class="text-caption text-secondary">Select a group from the Groups list to inspect members.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: SETTLE UP -->
+      <div id="view-settle-up" class="app-view hidden">
+        <div class="w-full max-w-[1120px] p-space-xl flex flex-col gap-space-lg">
+          <div class="flex items-center justify-between pb-space-md border-b border-outline-variant">
+            <div>
+              <h1 class="font-page-title text-page-title text-on-surface">Ledger Clearing &amp; Settle Up</h1>
+              <p class="font-caption text-caption text-secondary">Multilateral debt simplification and verified repayment ledger</p>
+            </div>
+            <button onclick="openRecordModal()" class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-all shadow-sm" type="button">
+              <span class="material-symbols-outlined text-[18px]">add_circle</span>
+              <span>Record payment</span>
+            </button>
+          </div>
+
+          <!-- Settle Up Metric Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-space-md">
+            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+              <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">You Owe</span>
+              <div class="mt-space-sm flex items-baseline justify-between">
+                <span id="settle-stat-owe" class="font-tabular-summary text-tabular-summary text-error font-semibold">-₹0.00</span>
+                <span class="font-caption text-caption text-secondary">Payable</span>
+              </div>
+            </div>
+            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+              <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">You Receive</span>
+              <div class="mt-space-sm flex items-baseline justify-between">
+                <span id="settle-stat-receive" class="font-tabular-summary text-tabular-summary text-tertiary-container font-semibold">+₹0.00</span>
+                <span class="font-caption text-caption text-secondary">Receivable</span>
+              </div>
+            </div>
+            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+              <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Pending Transfers</span>
+              <div class="mt-space-sm flex items-baseline justify-between">
+                <span id="settle-stat-transfers" class="font-tabular-summary text-tabular-summary text-on-surface font-semibold">0</span>
+                <span class="font-caption text-caption text-secondary">Optimal count</span>
+              </div>
+            </div>
+            <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+              <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Compression</span>
+              <div class="mt-space-sm flex items-baseline justify-between">
+                <span id="settle-stat-compression" class="font-tabular-summary text-tabular-summary text-primary font-semibold">100%</span>
+                <span class="font-caption text-caption text-secondary">Greedy Min-Cash</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simplified Transfers Plan -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+            <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/60">
+              <div>
+                <h3 class="font-section-heading text-section-heading text-on-surface font-semibold">Optimized Repayment Schedule</h3>
+                <p class="font-caption text-caption text-secondary">Minimum transactions required to completely settle all members</p>
+              </div>
+              <span class="text-xs px-2.5 py-1 rounded bg-surface-container text-secondary font-medium">Algorithmic Settlement</span>
+            </div>
+            <div id="settle-up-transfers" class="flex flex-col gap-2.5">
+              <div class="py-8 text-center text-secondary font-body-default">
+                Computing settlement paths...
+              </div>
+            </div>
+          </div>
+
+          <!-- Settlement History -->
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+            <h3 class="font-section-heading text-section-heading text-on-surface font-semibold">Recorded Settlement Payments</h3>
+            <div id="settlements-list" class="flex flex-col gap-2">
+              <div class="py-8 text-center text-secondary font-body-default">
+                No settlements recorded yet.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: REMINDERS -->
+      <div id="view-reminders" class="app-view hidden">
+        <div class="w-full max-w-[1120px] p-space-xl flex flex-col gap-space-lg">
+          <div class="flex items-center justify-between pb-space-sm border-b border-outline-variant">
+            <div>
+              <h1 class="font-page-title text-page-title text-on-surface">Payment Reminders</h1>
+              <p class="font-caption text-caption text-secondary">Pending unsettled shares awaiting clearance</p>
+            </div>
+            <button id="btn-send-all" class="h-9 px-space-md rounded-lg font-label-md text-label-md bg-primary text-on-primary hover:bg-primary-container transition-colors flex items-center gap-2" type="button">
+              <span class="material-symbols-outlined text-[18px]">outgoing_mail</span>
+              <span>Send all reminders</span>
+            </button>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+            <h3 class="font-section-heading text-section-heading text-on-surface">Pending Notices</h3>
+            <div id="reminders-list" class="flex flex-col gap-2">
+              <div class="py-8 text-center text-secondary font-body-default">
+                No pending reminders. All settled up!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: REPORTS -->
+      <div id="view-reports" class="app-view hidden">
+        <div class="flex flex-col w-full">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md px-space-xl py-space-lg bg-surface border-b border-outline-variant">
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-space-sm text-secondary font-caption-medium text-caption-medium uppercase tracking-wider">
+                <span>Fiscal Statement</span>
+                <span>/</span>
+                <span>Audited Ledgers</span>
+              </div>
+              <h1 class="font-page-title text-page-title text-on-surface">Reports &amp; Analytics</h1>
+            </div>
+            <div class="flex items-center gap-space-sm self-start md:self-auto">
+              <button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-sm flex items-center gap-space-sm transition-colors shadow-sm" id="btn-export-csv">
+                <span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+                <span>Export CSV</span>
+              </button>
+              <button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-sm font-medium flex items-center gap-space-sm transition-all shadow-sm" id="btn-export-pdf">
+                <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                <span>Print / PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="px-space-xl flex flex-col gap-space-lg py-space-lg max-w-[1120px]">
+            <!-- Report Metric Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+              <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+                <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Total Ledger Expense</span>
+                <div class="mt-space-sm flex items-baseline justify-between">
+                  <span id="report-total-amount" class="font-tabular-summary text-2xl font-semibold text-on-surface">₹0.00</span>
+                  <span class="font-caption text-caption text-secondary">Gross sum</span>
+                </div>
+              </div>
+              <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+                <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Transactions Recorded</span>
+                <div class="mt-space-sm flex items-baseline justify-between">
+                  <span id="report-transaction-count" class="font-tabular-summary text-2xl font-semibold text-on-surface">0</span>
+                  <span class="font-caption text-caption text-secondary">Postings</span>
+                </div>
+              </div>
+              <div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+                <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Average Ticket</span>
+                <div class="mt-space-sm flex items-baseline justify-between">
+                  <span id="report-average-amount" class="font-tabular-summary text-2xl font-semibold text-primary font-tabular-header">₹0.00</span>
+                  <span class="font-caption text-caption text-secondary">Per transaction</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Report Controller Filter Bar -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
+              <div class="flex items-center gap-3 flex-1">
+                <div class="relative w-48">
+                  <select id="report-group-filter" class="w-full h-9 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface text-sm focus:outline-none focus:border-primary cursor-pointer">
+                    <option value="">All Groups (Consolidated)</option>
+                  </select>
+                </div>
+                <div class="relative flex-1 max-w-sm">
+                  <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-secondary pointer-events-none">search</span>
+                  <input id="report-search-input" class="w-full h-9 pl-9 pr-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface placeholder:text-secondary text-sm focus:outline-none focus:border-primary" placeholder="Search statements by title, payer or category..." type="text">
+                </div>
+              </div>
+            </div>
+
+            <!-- Audited Itemized Table -->
+            <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm ring-1 ring-outline-variant/40">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-left" id="report-table">
+                  <thead class="bg-surface-container-low sticky top-0 z-10 select-none">
+                    <tr class="h-[44px]">
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Date</th>
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Description</th>
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Group</th>
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Paid by</th>
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider">Category</th>
+                      <th class="px-space-md font-tabular-header text-tabular-header text-secondary uppercase tracking-wider text-right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-surface-container-low">
+                    <tr><td colspan="6" class="px-space-md py-8 text-center text-secondary">Loading fiscal statement...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: SETTINGS -->
+      <div id="view-settings" class="app-view hidden">
+        <div class="flex flex-col w-full">
+<div class="max-w-[760px] w-full px-space-xl py-space-xl flex flex-col gap-space-xl">
+<!-- Top Action / Title Row -->
+<div class="flex items-end justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-tabular-header text-tabular-header text-secondary uppercase tracking-widest">Preferences • Ledger Config</span>
+</div>
+<h1 class="font-page-title text-page-title text-on-surface tracking-tight">Settings</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-caption text-caption text-secondary opacity-0 transition-opacity duration-300" id="save-status">All adjustments saved</span>
+<button class="h-9 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors flex items-center gap-2" id="save-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="">Save changes</span>
+</button>
+</div>
+</div>
+<!-- Section 1: Appearance -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<h2 class="font-section-heading text-section-heading text-on-surface">Appearance</h2>
+<p class="font-caption text-caption text-secondary">Interface chromatic mode and vertical line pitch across registers.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-xl flex flex-col gap-space-lg shadow-sm">
+<!-- Theme Selection -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">System Theme</label>
+<span class="font-caption text-caption text-secondary mb-2">Controls global contrast, sheet surface tones, and neutral border boundaries.</span>
+<div class="grid grid-cols-2 gap-3" id="theme-selector">
+<!-- Light Option -->
+<label class="relative flex flex-col gap-3 p-3.5 rounded-lg bg-surface-container-low cursor-pointer transition-all hover:bg-surface-container select-none">
+<input checked="" class="sr-only peer" name="theme_mode" type="radio" value="light">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">light_mode</span>
+                  Light Canvas
+                </span>
+<span class="w-4 h-4 rounded-full bg-primary flex items-center justify-center peer-checked:flex">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+</span>
+</div>
+<!-- Swatch Preview -->
+<div class="h-10 w-full rounded bg-surface p-1.5 flex gap-1.5">
+<div class="w-1/3 h-full rounded bg-surface-container"></div>
+<div class="w-2/3 h-full rounded bg-primary"></div>
+</div>
+<span class="font-caption text-caption text-secondary">Pure tabular high-clarity paper surface.</span>
+</label>
+<!-- Dark Option -->
+<label class="relative flex flex-col gap-3 p-3.5 rounded-lg bg-surface-container-low cursor-pointer opacity-70 hover:opacity-100 transition-all select-none">
+<input class="sr-only peer" name="theme_mode" type="radio" value="dark">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">dark_mode</span>
+                  Dark Canvas
+                </span>
+<span class="w-4 h-4 rounded-full bg-surface-container-high hidden peer-checked:flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface"></span>
+</span>
+</div>
+<!-- Swatch Preview -->
+<div class="h-10 w-full rounded bg-inverse-surface p-1.5 flex gap-1.5">
+<div class="w-1/3 h-full rounded bg-on-surface-variant"></div>
+<div class="w-2/3 h-full rounded bg-primary-fixed-dim"></div>
+</div>
+<span class="font-caption text-caption text-secondary">Low-luminance night settlement mode.</span>
+</label>
+</div>
+</div>
+<!-- Density Segmented Control -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface">Register Row Density</label>
+<span class="font-caption text-caption text-secondary mb-1">Row height cadence for ledger breakdown matrices and transaction tables.</span>
+<div class="inline-flex p-1 bg-surface-container rounded-lg self-start gap-1" id="density-switch">
+<button class="density-btn px-4 h-7 rounded font-label-md text-caption text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2" data-density="compact" type="button">
+<span class="material-symbols-outlined text-[16px]">density_small</span>
+<span class="">Compact (40px)</span>
+</button>
+<button class="density-btn px-4 h-7 rounded font-label-md text-caption bg-surface-container-lowest text-on-surface shadow-sm transition-colors flex items-center gap-2" data-density="standard" type="button">
+<span class="material-symbols-outlined text-[16px]">density_medium</span>
+<span class="">Standard (44px)</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Currency & Formatting -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<h2 class="font-section-heading text-section-heading text-on-surface">Currency &amp; Formatting</h2>
+<p class="font-caption text-caption text-secondary">Decimal separation, international currency unit, and ISO ledger timestamps.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-xl flex flex-col gap-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Primary Currency -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="currency-select">Base Ledger Currency</label>
+<div class="relative">
+<select class="w-full h-9 px-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-tabular-body text-tabular-body appearance-none focus:outline-none focus:bg-surface-container transition-colors" id="currency-select">
+<option selected="" value="INR">INR (₹) • Indian Rupee</option>
+<option value="USD">USD ($) • US Dollar</option>
+<option value="EUR">EUR (€) • Euro</option>
+<option value="GBP">GBP (£) • British Pound</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-secondary text-[18px]">expand_more</span>
+</div>
+<span class="font-caption text-caption text-secondary">Default unit for all cross-participant splits.</span>
+</div>
+<!-- Date Format -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="date-format-select">Date Representation</label>
+<div class="relative">
+<select class="w-full h-9 px-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-tabular-body text-tabular-body appearance-none focus:outline-none focus:bg-surface-container transition-colors" id="date-format-select">
+<option selected="" value="DD MMM YYYY">DD MMM YYYY (e.g. 14 Oct 2024)</option>
+<option value="YYYY-MM-DD">YYYY-MM-DD (ISO 8601)</option>
+<option value="MM/DD/YYYY">MM/DD/YYYY (US Standard)</option>
+<option value="DD/MM/YYYY">DD/MM/YYYY (UK / Commonwealth)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-secondary text-[18px]">expand_more</span>
+</div>
+<span class="font-caption text-caption text-secondary">Time column display format in settlement ledgers.</span>
+</div>
+</div>
+<!-- Number Formatting Options -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface">Delimitation Scheme</label>
+<div class="grid grid-cols-2 gap-3" id="separator-group">
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container select-none">
+<input checked="" class="sr-only peer" name="num_delimit" type="radio" value="standard">
+<div class="w-3.5 h-3.5 rounded-full bg-surface-container-high peer-checked:bg-primary flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary hidden peer-checked:block"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-tabular-body text-tabular-body text-on-surface font-medium">1,234,567.89</span>
+<span class="font-caption text-caption text-secondary">Comma group, dot fractional</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container select-none">
+<input class="sr-only peer" name="num_delimit" type="radio" value="continental">
+<div class="w-3.5 h-3.5 rounded-full bg-surface-container-high peer-checked:bg-primary flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary hidden peer-checked:block"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-tabular-body text-tabular-body text-on-surface font-medium">1.234.567,89</span>
+<span class="font-caption text-caption text-secondary">Dot group, comma fractional</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Live Formatting Monospace Sample -->
+<div class="p-3.5 rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-tabular-header text-tabular-header uppercase text-secondary">Active Output Preview</span>
+<span class="font-caption text-caption text-secondary">Synchronized</span>
+</div>
+<div class="flex items-center justify-between font-tabular-summary text-tabular-summary text-on-surface bg-surface-container-lowest p-2.5 rounded">
+<span id="preview-date" class="">14 Oct 2024</span>
+<span class="text-tertiary" id="preview-amount">+₹12,450.00</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Reminders & Notifications -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<h2 class="font-section-heading text-section-heading text-on-surface">Reminders &amp; Automation</h2>
+<p class="font-caption text-caption text-secondary">Autonomous balancing prompts and notification intervals for outstanding participant debts.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-xl flex flex-col gap-space-md shadow-sm">
+<!-- Toggle 1: Email Summary -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col pr-4">
+<span class="font-label-md text-label-md text-on-surface">Periodic Digest</span>
+<span class="font-caption text-caption text-secondary">Deliver weekly Monday ledger rollup of owed balances to your primary inbox.</span>
+</div>
+<button aria-checked="true" class="toggle-btn w-10 h-6 rounded-full bg-primary transition-colors relative flex items-center p-0.5 shrink-0" role="switch" type="button">
+<span class="w-5 h-5 rounded-full bg-on-primary transition-transform translate-x-4"></span>
+</button>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Setting: Overdue Alert Threshold -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col pr-4">
+<label class="font-label-md text-label-md text-on-surface" for="threshold-input">Overdue Reminder Window</label>
+<span class="font-caption text-caption text-secondary">Days before un-settled balance generates a follow-up indicator.</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-16 h-9 px-2 text-center rounded-lg bg-surface-container-low text-on-surface font-tabular-body text-tabular-body focus:outline-none focus:bg-surface-container transition-colors" id="threshold-input" max="90" min="1" type="number" value="14">
+<span class="font-caption text-caption text-secondary">days</span>
+</div>
+</div>
+<div class="h-px bg-surface-container"></div>
+<!-- Toggle 2: Quiet Hours -->
+<div class="flex items-center justify-between py-1">
+<div class="flex flex-col pr-4">
+<span class="font-label-md text-label-md text-on-surface">Enforce Quiet Windows</span>
+<span class="font-caption text-caption text-secondary">Suppress all automated outgoing participant reminders between 21:00 and 08:00.</span>
+</div>
+<button aria-checked="true" class="toggle-btn w-10 h-6 rounded-full bg-primary transition-colors relative flex items-center p-0.5 shrink-0" role="switch" type="button">
+<span class="w-5 h-5 rounded-full bg-on-primary transition-transform translate-x-4"></span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 4: Data & Backup -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col gap-0.5">
+<h2 class="font-section-heading text-section-heading text-on-surface">Data &amp; Integrity</h2>
+<p class="font-caption text-caption text-secondary">Export historical registers, batch import expenses, and permanent state clearing.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-xl flex flex-col gap-space-lg shadow-sm">
+<!-- Action Row 1: Export & Import -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Export -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between gap-3">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">download</span>
+                Export Full Register
+              </span>
+<span class="font-caption text-caption text-secondary">Download complete machine-readable ledger archive including participants, payments, and splits.</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="h-8 px-3 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-caption transition-colors" id="export-json-btn" type="button">JSON Format</button>
+<button class="h-8 px-3 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-caption transition-colors" id="export-csv-btn" type="button">CSV Table</button>
+</div>
+</div>
+<!-- Import -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between gap-3">
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">upload</span>
+                Import Line Items
+              </span>
+<span class="font-caption text-caption text-secondary">Bulk parse transactions from standard banking statement formats (CSV, OFX standard).</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<label class="h-8 px-3 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-caption transition-colors inline-flex items-center cursor-pointer">
+<span class="">Select Document</span>
+<input accept=".csv" class="sr-only" id="import-file-input" type="file">
+</label>
+<span class="font-caption text-caption text-secondary truncate max-w-[120px]" id="import-filename">No file chosen</span>
+</div>
+</div>
+</div>
+<!-- Action Row 2: Archive Settled -->
+<div class="flex items-center justify-between p-space-md rounded-lg bg-surface-container-low">
+<div class="flex flex-col pr-4">
+<span class="font-label-md text-label-md text-on-surface">Archive Zero-Balance Groups</span>
+<span class="font-caption text-caption text-secondary">Move 4 resolved split groups with zero unsettled liabilities to deep archive.</span>
+</div>
+<button class="h-8 px-3 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-caption transition-colors whitespace-nowrap" id="archive-btn" type="button">
+            Archive Now
+          </button>
+</div>
+<!-- Danger Zone -->
+<div class="p-space-md rounded-lg bg-error-container/40 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex flex-col pr-4">
+<span class="font-label-md text-label-md text-error flex items-center gap-1.5 font-semibold">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+                Danger Zone: Purge Ledger
+              </span>
+<span class="font-caption text-caption text-on-surface-variant">Irrevocably erase all transaction lines, recalculate net liabilities to zero, and purge local indices.</span>
+</div>
+<button class="h-8 px-3 rounded bg-error text-on-error hover:bg-on-error-container font-label-md text-caption transition-colors whitespace-nowrap" id="purge-btn" type="button">
+              Reset All Records
+            </button>
+</div>
+<div class="hidden flex items-center justify-between p-2.5 rounded bg-surface-container-lowest gap-3" id="purge-confirm-dialog">
+<span class="font-caption text-caption text-error font-medium">Confirm complete ledger deletion? This cannot be undone.</span>
+<div class="flex items-center gap-2">
+<button class="h-7 px-2.5 rounded bg-surface-container font-label-md text-caption text-on-surface" id="purge-cancel" type="button">Cancel</button>
+<button class="h-7 px-2.5 rounded bg-error text-on-error font-label-md text-caption font-medium" id="purge-execute" type="button">Proceed</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: ADD EXPENSE (Authentic Stitch 520px Dialog) -->
+  <!-- Modal Overlay Veil -->
+<div id="modal-add-expense" class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] flex items-center justify-center p-space-md overflow-y-auto">
+  <div aria-labelledby="modal-headline" aria-modal="true" class="w-[520px] bg-surface-container-lowest rounded-lg p-[20px] flex flex-col shadow-xl ring-1 ring-outline-variant/60 my-auto text-on-surface relative" role="dialog">
+    <div class="flex items-center justify-between pb-space-md">
+      <div class="flex flex-col">
+        <h2 class="font-section-heading text-section-heading text-on-surface leading-tight" id="modal-headline">Add expense</h2>
+        <span class="font-caption text-caption text-secondary">Enter transaction details and distribution rules</span>
+      </div>
+      <button aria-label="Close dialog" onclick="closeAddExpenseModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" type="button">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <form class="flex flex-col gap-[16px]" id="expenseForm">
+      <div class="flex flex-col gap-space-xs">
+        <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-desc">Description / Title</label>
+        <input class="h-[36px] px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-body-default text-body-default text-on-surface" id="expense-desc" placeholder="e.g. Dinner, Groceries, Movie" required type="text">
+      </div>
+      <div class="grid grid-cols-2 gap-space-md">
+        <div class="flex flex-col gap-space-xs">
+          <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-amount">Amount</label>
+          <div class="relative flex items-center">
+            <input class="h-[36px] w-full px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-tabular-body text-tabular-body text-on-surface text-right" id="expense-amount" step="0.01" min="0.01" placeholder="0.00" required type="number">
+          </div>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-date">Date</label>
+          <input class="h-[36px] w-full px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-tabular-body text-tabular-body text-on-surface" id="expense-date" type="date">
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-space-md">
+        <div class="flex flex-col gap-space-xs">
+          <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-group">Group</label>
+          <select class="h-[36px] w-full px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-body-default text-body-default text-on-surface cursor-pointer" id="expense-group" required>
+          </select>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-payer">Paid by</label>
+          <select class="h-[36px] w-full px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-body-default text-body-default text-on-surface cursor-pointer" id="expense-payer" required>
+          </select>
+        </div>
+      </div>
+      <div class="flex flex-col gap-space-xs">
+        <label class="font-caption-medium text-caption-medium text-on-surface" for="expense-category">Category</label>
+        <select class="h-[36px] w-full px-3 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant focus:ring-1 focus:ring-primary-container outline-none font-body-default text-body-default text-on-surface cursor-pointer" id="expense-category">
+          <option value="Groceries">Groceries</option>
+          <option value="Dining">Dining & Food</option>
+          <option value="Utilities">Utilities & Rent</option>
+          <option value="Transport">Transport</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="General" selected>General</option>
+        </select>
+      </div>
+      <div class="flex flex-col gap-space-xs">
+        <div class="flex items-center justify-between pb-1">
+          <span class="font-caption-medium text-caption-medium text-secondary uppercase tracking-wider">Split with members</span>
+        </div>
+        <div id="expense-members-list" class="flex flex-col rounded-lg bg-surface-container-low p-2 max-h-40 overflow-y-auto">
+          <p class="text-caption text-secondary">Loading members...</p>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-space-sm pt-2">
+        <button onclick="closeAddExpenseModal()" class="h-[36px] px-4 rounded-lg bg-surface-container-lowest ring-1 ring-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors" type="button">
+          Cancel
+        </button>
+        <button class="h-[36px] px-4 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:brightness-95 transition-all flex items-center gap-1.5 shadow-sm" type="submit">
+          <span class="material-symbols-outlined text-[18px]">done</span>
+          <span>Save expense</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm hidden" id="record-modal">
+  <div class="bg-surface-container-lowest rounded-xl max-w-[480px] w-full p-space-lg flex flex-col gap-space-md shadow-2xl ring-1 ring-outline-variant/60">
+    <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/60">
+      <div>
+        <h3 class="font-section-heading text-section-heading text-on-surface">Record Settlement</h3>
+        <span class="font-caption text-caption text-secondary">Record a direct payment between participants</span>
+      </div>
+      <button onclick="closeRecordModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container-low transition-colors" type="button">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <form class="flex flex-col gap-space-md" id="record-settlement-form">
+      <div class="grid grid-cols-2 gap-space-sm">
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase">From (Payer)</label>
+          <select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-payer-select">
+          </select>
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase">To (Payee)</label>
+          <select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-payee-select">
+          </select>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="font-tabular-header text-tabular-header text-secondary uppercase">Amount</label>
+        <input class="w-full h-9 px-3 rounded-lg bg-surface-container-low font-tabular-body text-tabular-body text-on-surface focus:outline-none" id="modal-amount-input" required step="0.01" min="0.01" type="number" placeholder="0.00">
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="font-tabular-header text-tabular-header text-secondary uppercase">Settlement Method</label>
+        <select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-method-select">
+          <option value="UPI">UPI / Instant Pay</option>
+          <option value="Bank transfer">Direct Bank Transfer</option>
+          <option value="Cash">Cash Settlement</option>
+          <option value="Other">Other Adjustment</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-end gap-space-sm pt-space-sm">
+        <button onclick="closeRecordModal()" class="h-9 px-space-md rounded-lg text-secondary hover:bg-surface-container-low font-label-md text-label-md transition-colors" type="button">
+          Cancel
+        </button>
+        <button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors" type="submit">
+          Confirm & Record
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- MODAL: NEW GROUP -->
+  <div id="modal-new-group" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-[460px] bg-surface-container-lowest rounded-xl p-space-lg flex flex-col gap-space-md shadow-2xl ring-1 ring-outline-variant/60 text-on-surface">
+      <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/60">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">group_add</span>
+          </div>
+          <div>
+            <h3 class="font-section-heading text-section-heading text-on-surface font-semibold">Create New Group</h3>
+            <p class="font-caption text-caption text-secondary">Establish a shared ledger for recurring costs</p>
+          </div>
+        </div>
+        <button onclick="closeNewGroupModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+      <form id="newGroupForm" onsubmit="handleNewGroup(event)" class="flex flex-col gap-space-md">
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Group Name *</label>
+          <input required id="new-group-name" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 font-body-default text-body-default text-on-surface focus:outline-none focus:border-primary text-sm" placeholder="e.g. Manali Trip, Flat 4B, Office Lunch" type="text">
+        </div>
+        <div class="grid grid-cols-2 gap-space-md">
+          <div class="flex flex-col gap-1">
+            <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Currency</label>
+            <select id="new-group-currency" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 font-body-default text-body-default text-on-surface focus:outline-none focus:border-primary text-sm cursor-pointer">
+              <option value="INR" selected>INR (₹)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Category</label>
+            <select id="new-group-category" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 font-body-default text-body-default text-on-surface focus:outline-none focus:border-primary text-sm cursor-pointer">
+              <option value="General" selected>General</option>
+              <option value="Apartment / Flat">Apartment / Flat</option>
+              <option value="Trip / Vacation">Trip / Vacation</option>
+              <option value="Work / Office">Work / Office</option>
+              <option value="Event / Party">Event / Party</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Add Other Members (Optional)</label>
+          <input id="new-group-members" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 font-body-default text-body-default text-on-surface focus:outline-none focus:border-primary text-sm" placeholder="e.g. Rohan, Priya, Amit (comma separated)" type="text">
+          <span class="text-[11px] text-secondary">You are included automatically as creator. Enter other member names to add them.</span>
+        </div>
+        <div class="flex items-center justify-end gap-space-sm pt-space-xs border-t border-outline-variant/40 mt-1">
+          <button type="button" onclick="closeNewGroupModal()" class="h-9 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-sm transition-colors">Cancel</button>
+          <button type="submit" id="btn-submit-new-group" class="h-9 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-sm font-medium transition-all shadow-sm flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            <span>Create Group</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD MEMBER TO GROUP -->
+  <div id="modal-add-member" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-[400px] bg-surface-container-lowest rounded-xl p-space-lg flex flex-col gap-space-md shadow-2xl ring-1 ring-outline-variant/60 text-on-surface">
+      <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/60">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+          </div>
+          <div>
+            <h3 class="font-section-heading text-section-heading text-on-surface font-semibold text-base">Add Member</h3>
+            <p class="font-caption text-caption text-secondary text-xs" id="add-member-group-name">To group</p>
+          </div>
+        </div>
+        <button onclick="closeAddMemberModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+      <form id="addMemberForm" onsubmit="handleAddMember(event)" class="flex flex-col gap-space-md">
+        <input type="hidden" id="add-member-group-id" value="">
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Member Name *</label>
+          <input required id="add-member-name" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm" placeholder="e.g. Rahul Sharma" type="text">
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="font-tabular-header text-tabular-header text-secondary uppercase font-semibold text-xs">Email (Optional)</label>
+          <input id="add-member-email" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm" placeholder="rahul@example.com" type="email">
+        </div>
+        <div class="flex items-center justify-end gap-space-sm pt-space-xs border-t border-outline-variant/40">
+          <button type="button" onclick="closeAddMemberModal()" class="h-9 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm transition-colors">Cancel</button>
+          <button type="submit" class="h-9 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-sm font-medium transition-all shadow-sm flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+            <span>Add Member</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- AUTH OVERLAY (Sign In / Register) -->
+  <div id="auth-overlay" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-[420px] bg-surface-container-lowest rounded-xl p-6 shadow-2xl ring-1 ring-outline-variant/60 flex flex-col gap-5 text-on-surface relative">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold text-lg shadow-sm">
+            ES
+          </div>
+          <div>
+            <h2 class="text-xl font-bold tracking-tight text-on-surface">Expense Splitter</h2>
+            <p class="text-xs text-secondary">Ledger Calm Accounting & Settlement</p>
+          </div>
+        </div>
+        <button id="auth-close-btn" onclick="hideAuthOverlay()" type="button" class="hidden w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" title="Close">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Auth Error Notification Banner -->
+      <div id="auth-error-msg" class="hidden p-3 rounded-lg bg-error-container text-on-error-container text-xs font-medium flex items-center gap-2">
+        <span class="material-symbols-outlined text-[18px]">error</span>
+        <span id="auth-error-text"></span>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="flex rounded-lg bg-surface-container p-1 text-sm font-medium">
+        <button id="auth-show-login" onclick="switchAuthTab('login')" type="button" class="flex-1 py-1.5 text-center rounded-md font-semibold text-on-surface bg-surface-container-lowest shadow-sm transition-all">Sign In</button>
+        <button id="auth-show-register" onclick="switchAuthTab('register')" type="button" class="flex-1 py-1.5 text-center rounded-md text-secondary hover:text-on-surface transition-all">Create Account</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="flex flex-col gap-4">
+        <!-- Quick Switch User Dropdown (populated if users exist) -->
+        <div id="auth-quick-user-box" class="hidden flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Select Account</label>
+          <select id="auth-user-select" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm cursor-pointer">
+          </select>
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Email or Username</label>
+          <input id="login-email" type="text" required placeholder="name@example.com" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Password</label>
+          <input id="login-password" type="password" required placeholder="••••••••" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm">
+        </div>
+        <button id="btn-login-submit" type="submit" class="h-10 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2 mt-1">
+          <span class="material-symbols-outlined text-[18px]">login</span>
+          <span>Sign In</span>
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="hidden flex flex-col gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Full Name</label>
+          <input id="register-name" type="text" required placeholder="e.g. John Doe" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Email Address</label>
+          <input id="register-email" type="email" required placeholder="name@example.com" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold uppercase tracking-wider text-secondary">Password (min 6 characters)</label>
+          <input id="register-password" type="password" required minlength="6" placeholder="••••••••" class="h-10 px-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary text-sm">
+        </div>
+        <button id="btn-register-submit" type="submit" class="h-10 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2 mt-1">
+          <span class="material-symbols-outlined text-[18px]">person_add</span>
+          <span>Create Account</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- MASTER LOGIC & STATE ENGINE -->
+  <script src="app.js"></script>
+</body>
+</html>

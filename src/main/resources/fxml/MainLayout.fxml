@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="rootStackPane" prefHeight="760.0" prefWidth="1180.0" styleClass="root"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.expensesplitter.controller.MainController">
+
+    <!-- Primary Application Shell -->
+    <BorderPane fx:id="mainContainer">
+        <!-- 240px Fixed Sidebar -->
+        <left>
+            <VBox prefWidth="240.0" styleClass="app-sidebar" BorderPane.alignment="CENTER">
+                <!-- App Title Header -->
+                <HBox alignment="CENTER_LEFT" prefHeight="56.0" styleClass="sidebar-header">
+                    <Label styleClass="sidebar-title" text="Expense Splitter" />
+                </HBox>
+
+                <!-- Navigation Links List -->
+                <VBox fx:id="navContainer" spacing="4.0">
+                    <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                    </padding>
+                    <Button fx:id="navDashboardBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                            onAction="#onNavigateDashboard" styleClass="sidebar-nav-item, active" text="Dashboard" />
+                    <Button fx:id="navGroupsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                            onAction="#onNavigateGroups" styleClass="sidebar-nav-item" text="Groups" />
+                    <Button fx:id="navRemindersBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                            onAction="#onNavigateReminders" styleClass="sidebar-nav-item" text="Reminders" />
+                    <Button fx:id="navReportsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                            onAction="#onNavigateReports" styleClass="sidebar-nav-item" text="Reports" />
+                    <Button fx:id="navSettingsBtn" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308"
+                            onAction="#onNavigateSettings" styleClass="sidebar-nav-item" text="Settings" />
+                </VBox>
+
+                <!-- Flexible Spacer -->
+                <Region VBox.vgrow="ALWAYS" />
+
+                <!-- Current User Profile Footer -->
+                <HBox fx:id="userProfileBox" alignment="CENTER_LEFT" onMouseClicked="#onUserMenuClick" spacing="12.0" styleClass="sidebar-user-card" style="-fx-cursor: hand;">
+                    <HBox alignment="CENTER" styleClass="avatar-circle">
+                        <Label fx:id="userAvatarLabel" styleClass="avatar-initials" text="--" />
+                    </HBox>
+                    <VBox alignment="CENTER_LEFT" spacing="2.0">
+                        <Label fx:id="userNameLabel" styleClass="text-label" text="Guest" />
+                        <Label fx:id="userEmailLabel" styleClass="text-caption" text="" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </left>
+
+        <!-- Top Header & Main Content Host -->
+        <center>
+            <BorderPane BorderPane.alignment="CENTER">
+                <top>
+                    <HBox alignment="CENTER_RIGHT" prefHeight="56.0" spacing="12.0" styleClass="app-header">
+                        <HBox alignment="CENTER_LEFT" spacing="8.0">
+                            <TextField fx:id="globalSearchField" prefWidth="240.0" promptText="Filter expenses... (Ctrl+F)" />
+                        </HBox>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addExpenseQuickBtn" onAction="#onQuickAddExpense" styleClass="btn-primary" text="Add expense" />
+                        <Button fx:id="themeToggleBtn" onAction="#onToggleTheme" styleClass="btn-secondary" text="Dark theme" />
+                    </HBox>
+                </top>
+                <center>
+                    <StackPane fx:id="contentArea" BorderPane.alignment="CENTER" />
+                </center>
+            </BorderPane>
+        </center>
+    </BorderPane>
+
+    <!-- Modal Dialog Backdrop Host Layer (hidden by default) -->
+    <StackPane fx:id="modalOverlayLayer" mouseTransparent="true" opacity="0.0" style="-fx-background-color: rgba(0, 0, 0, 0.45);" visible="false">
+        <StackPane fx:id="modalContentHolder" alignment="CENTER" maxWidth="520.0" />
+    </StackPane>
+</StackPane>
+

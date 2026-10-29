@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane alignment="CENTER" style="-fx-background-color: -color-page;"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.expensesplitter.controller.AuthController">
+
+    <VBox alignment="CENTER" maxWidth="440.0" spacing="20.0" styleClass="card">
+        <padding>
+            <Insets bottom="32.0" left="32.0" right="32.0" top="32.0" />
+        </padding>
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="6.0">
+            <Label styleClass="text-title" text="Expense Splitter" />
+            <Label fx:id="subtitleLabel" styleClass="text-secondary" text="Sign in to your shared expense workspace" />
+        </VBox>
+
+        <!-- Error Notification Label -->
+        <Label fx:id="errorMessageLabel" managed="false" styleClass="field-error-label" visible="false" wrapText="true" />
+
+        <!-- Sign In Form Container -->
+        <VBox fx:id="signInForm" spacing="16.0">
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Select account" />
+                <ComboBox fx:id="accountPickerComboBox" maxWidth="1.7976931348623157E308" prefHeight="36.0" promptText="Choose an account" />
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Password" />
+                <PasswordField fx:id="signInPasswordField" onAction="#onSignIn" prefHeight="36.0" promptText="Enter password" />
+            </VBox>
+
+            <Button fx:id="signInBtn" maxWidth="1.7976931348623157E308" onAction="#onSignIn" prefHeight="36.0" styleClass="btn-primary" text="Sign in" />
+
+            <HBox alignment="CENTER" spacing="4.0">
+                <Label styleClass="text-caption" text="Need a new profile?" />
+                <Hyperlink onAction="#onSwitchToRegister" text="Create account" />
+            </HBox>
+        </VBox>
+
+        <!-- Register / Create Account Form Container -->
+        <VBox fx:id="registerForm" managed="false" spacing="16.0" visible="false">
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Full name" />
+                <TextField fx:id="registerNameField" prefHeight="36.0" promptText="e.g. Alex Taylor" />
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Email address (optional)" />
+                <TextField fx:id="registerEmailField" prefHeight="36.0" promptText="e.g. alex@example.com" />
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Password (at least 6 characters)" />
+                <PasswordField fx:id="registerPasswordField" prefHeight="36.0" promptText="Choose a secure password" />
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label styleClass="form-label" text="Confirm password" />
+                <PasswordField fx:id="registerConfirmPasswordField" onAction="#onRegister" prefHeight="36.0" promptText="Re-enter password" />
+            </VBox>
+
+            <Button fx:id="registerBtn" maxWidth="1.7976931348623157E308" onAction="#onRegister" prefHeight="36.0" styleClass="btn-primary" text="Create account" />
+
+            <HBox fx:id="backToSignInBox" alignment="CENTER" spacing="4.0">
+                <Label styleClass="text-caption" text="Already have an account?" />
+                <Hyperlink onAction="#onSwitchToSignIn" text="Sign in" />
+            </HBox>
+        </VBox>
+    </VBox>
+</StackPane>
+

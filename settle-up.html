@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=Space+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-fixed-dim":"#8bd79b","on-primary-container":"#9ee9d3","secondary-fixed-dim":"#c1c7cd","error-container":"#ffdad6","secondary-fixed":"#dee3e9","primary-fixed":"#a6f1db","on-tertiary-container":"#9fecae","on-background":"#191c1e","on-secondary-fixed":"#161c21","secondary-container":"#dbe0e6","primary":"#005243","surface":"#f8f9fc","on-surface-variant":"#3f4945","on-secondary":"#ffffff","on-error":"#ffffff","on-tertiary-fixed-variant":"#005227","outline-variant":"#bec9c4","on-primary-fixed":"#002019","surface-container":"#eceef0","surface-container-high":"#e7e8eb","on-error-container":"#93000a","tertiary":"#005427","on-primary-fixed-variant":"#005142","tertiary-fixed":"#a6f4b6","error":"#ba1a1a","tertiary-container":"#206d3c","on-tertiary-fixed":"#00210c","surface-container-lowest":"#ffffff","background":"#f8f9fc","outline":"#6f7975","surface-dim":"#d8dadd","surface-bright":"#f8f9fc","primary-fixed-dim":"#8bd5c0","on-secondary-container":"#5d6368","inverse-on-surface":"#eff1f3","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#41474c","surface-tint":"#1a6a59","on-surface":"#191c1e","secondary":"#595f64","surface-container-highest":"#e1e2e5","on-primary":"#ffffff","surface-container-low":"#f2f4f6","primary-container":"#1b6b5a","inverse-surface":"#2e3133","inverse-primary":"#8bd5c0","surface-variant":"#e1e2e5"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-md":"1rem","space-xs":"0.25rem","space-lg":"1.5rem","space-sm":"0.5rem","space-xl":"2rem","gutter":"1rem","margin":"1.5rem"},fontFamily:{"tabular-summary":["Space Mono"],"page-title":["IBM Plex Sans"],"body-default":["IBM Plex Sans"],"label-md":["IBM Plex Sans"],"caption":["IBM Plex Sans"],"label-lg":["IBM Plex Sans"],"tabular-body":["Space Mono"],"tabular-header":["Space Mono"],"caption-medium":["IBM Plex Sans"],"section-heading":["IBM Plex Sans"]},fontSize:{"tabular-summary":["16px",{lineHeight:"24px",fontWeight:"600"}],"page-title":["28px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-default":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-md":["14px",{lineHeight:"20px",fontWeight:"500"}],"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"label-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"tabular-body":["14px",{lineHeight:"20px",fontWeight:"400"}],"tabular-header":["12px",{lineHeight:"16px",fontWeight:"500"}],"caption-medium":["12px",{lineHeight:"16px",letterSpacing:"0.02em",fontWeight:"500"}],"section-heading":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}]}}}}</script></head><body class="bg-surface font-body-default text-body-default text-on-surface antialiased"><aside class="fixed left-0 top-0 bottom-0 w-[240px] bg-surface border-r border-outline-variant z-30 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-14 px-space-lg flex items-center border-b border-outline-variant"><span class="font-label-lg text-label-lg text-on-surface tracking-tight">Expense Splitter</span></div><nav class="p-space-sm flex flex-col gap-1" data-active-classes="bg-surface-container-high text-on-surface font-semibold"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="">Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="groups" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="">Groups</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="reminders" href="#"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="">Reminders</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="reports" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="">Reports</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-md text-label-md transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="">Settings</span></a></nav></div><div class="p-space-md border-t border-outline-variant flex items-center justify-between gap-3"><div class="flex items-center gap-3 min-w-0"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 border border-outline-variant"><span class="font-label-md text-xs font-semibold text-on-surface">AR</span></div><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface truncate">Asha Rao</span><span class="font-caption text-caption text-secondary truncate">asha@example.com</span></div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-14 bg-surface/90 backdrop-blur-md border-b border-outline-variant z-20 flex items-center justify-end px-space-xl gap-3"><button class="flex items-center justify-center w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button class="flex items-center justify-center w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></header><main class="pt-14"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1120px] mx-auto px-space-lg py-space-xl flex flex-col gap-space-xl">
+<!-- Top Action Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="font-tabular-header text-tabular-header tracking-wider uppercase">Ledger Clearing</span>
+<span class="text-outline-variant">/</span>
+<span class="font-caption text-caption text-on-surface-variant">Reconciliation Cycle #24</span>
+</div>
+<h1 class="font-page-title text-page-title text-on-surface tracking-tight">Settle up</h1>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-2 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">file_download</span>
+<span class="">Export settlement</span>
+</button>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors" id="open-record-modal-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Record payment</span>
+</button>
+</div>
+</div>
+<!-- Group Filter & Calculation Summary Canvas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Selection Filter Card -->
+<div class="lg:col-span-4 bg-surface-container-lowest rounded-lg p-space-lg flex flex-col justify-between">
+<div class="flex flex-col gap-space-sm">
+<span class="font-tabular-header text-tabular-header uppercase text-secondary">Accounting Scope</span>
+<div class="relative">
+<select class="w-full h-9 rounded-lg bg-surface-container-low px-3 pr-8 font-label-md text-label-md text-on-surface focus:outline-none appearance-none cursor-pointer" id="group-filter">
+<option selected="" value="flat4b">Flat 4B (Active)</option>
+<option value="all">All Groups (Consolidated)</option>
+<option value="vacation">Goa Trip 2024</option>
+<option value="workspace">Studio 12 Co-working</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-[20px] pointer-events-none text-secondary">expand_more</span>
+</div>
+</div>
+<div class="pt-space-md mt-space-md bg-surface-container-low rounded-lg p-space-md flex flex-col gap-1">
+<div class="flex justify-between items-center text-secondary font-caption text-caption">
+<span class="">Graph Simplification</span>
+<span class="font-tabular-body text-tabular-body text-primary font-medium">Active (Greedy flow)</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant">
+            7 bilateral balances compressed into 3 multi-party transfers.
+          </p>
+</div>
+</div>
+<!-- Metric Panels -->
+<div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-lowest rounded-lg p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-tabular-header text-tabular-header uppercase">Total Residual</span>
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-summary text-tabular-summary text-on-surface text-[22px] leading-tight">₹1,840.00</div>
+<span class="font-caption text-caption text-secondary mt-1 block">3 pending transfers</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-tabular-header text-tabular-header uppercase">You Receive</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">arrow_downward</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-summary text-tabular-summary text-tertiary text-[22px] leading-tight">+₹1,200.00</div>
+<span class="font-caption text-caption text-secondary mt-1 block">From Meera &amp; Karan</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-lg flex flex-col justify-between">
+<div class="flex items-center justify-between text-secondary">
+<span class="font-tabular-header text-tabular-header uppercase">You Owe</span>
+<span class="material-symbols-outlined text-[18px] text-error">arrow_upward</span>
+</div>
+<div class="mt-space-md">
+<div class="font-tabular-summary text-tabular-summary text-error text-[22px] leading-tight">-₹640.00</div>
+<span class="font-caption text-caption text-secondary mt-1 block">To Ravi Kumar</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggested Optimized Debt Settlements -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-section-heading text-section-heading text-on-surface">Suggested settlements</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-tabular-header text-tabular-header">3 transactions</span>
+</div>
+<span class="font-caption text-caption text-secondary">Optimized settlement network</span>
+</div>
+<div class="flex flex-col gap-space-sm" id="settlement-list">
+<!-- Settlement Row 1 (User Owed Outbound) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md hover:bg-surface-container-low transition-colors duration-150 flex flex-col lg:flex-row lg:items-center justify-between gap-space-md" data-settlement-id="settle-1">
+<div class="flex items-start sm:items-center gap-space-md min-w-0">
+<!-- Avatars Flow -->
+<div class="flex items-center gap-1.5 shrink-0">
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-surface" title="Asha Rao">
+                AR
+              </div>
+<span class="material-symbols-outlined text-secondary text-[16px]">arrow_forward</span>
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-secondary-container" title="Ravi Kumar">
+                RK
+              </div>
+</div>
+<!-- Descriptor & Breakdown -->
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2 flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface">
+<strong class="font-semibold text-primary">Asha</strong> pays <strong class="font-semibold text-on-surface">Ravi</strong>
+</span>
+<span class="font-caption text-caption text-secondary">via Net Banking or UPI</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-caption text-caption text-on-surface-variant truncate">Settles grocery &amp; utilities share</span>
+<span class="text-outline-variant font-caption text-caption">•</span>
+<span class="font-tabular-header text-tabular-header text-secondary uppercase">Ref: #INV-4029</span>
+</div>
+</div>
+</div>
+<!-- Amount and Action Blocks -->
+<div class="flex items-center justify-between lg:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-tabular-summary text-tabular-summary text-on-surface text-[18px]">₹640.00</span>
+<span class="font-caption text-caption text-secondary">Full liquidation</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg transition-colors mark-paid-btn" data-debt-amount="640.00" data-debt-title="Asha pays Ravi" type="button">
+                Mark as paid
+              </button>
+<button class="h-9 px-3 text-secondary hover:text-on-surface font-label-md text-label-md rounded-lg transition-colors partial-pay-btn" data-debt-amount="640.00" data-debt-title="Asha pays Ravi" type="button">
+                Partial
+              </button>
+</div>
+</div>
+</div>
+<!-- Settlement Row 2 (User Inbound) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md hover:bg-surface-container-low transition-colors duration-150 flex flex-col lg:flex-row lg:items-center justify-between gap-space-md" data-settlement-id="settle-2">
+<div class="flex items-start sm:items-center gap-space-md min-w-0">
+<!-- Avatars Flow -->
+<div class="flex items-center gap-1.5 shrink-0">
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-secondary-container" title="Meera Sen">
+                MS
+              </div>
+<span class="material-symbols-outlined text-secondary text-[16px]">arrow_forward</span>
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-surface" title="Asha Rao">
+                AR
+              </div>
+</div>
+<!-- Descriptor & Breakdown -->
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2 flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface">
+<strong class="font-semibold text-on-surface">Meera</strong> pays <strong class="font-semibold text-primary">Asha</strong>
+</span>
+<span class="font-caption text-caption text-secondary">Incoming direct transfer</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-caption text-caption text-on-surface-variant truncate">Settles Wi-Fi router &amp; housekeeping supplies</span>
+<span class="text-outline-variant font-caption text-caption">•</span>
+<span class="font-tabular-header text-tabular-header text-secondary uppercase">Ref: #INV-4033</span>
+</div>
+</div>
+</div>
+<!-- Amount and Action Blocks -->
+<div class="flex items-center justify-between lg:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-tabular-summary text-tabular-summary text-tertiary text-[18px]">₹480.00</span>
+<span class="font-caption text-caption text-secondary">Receivable</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg transition-colors mark-paid-btn" data-debt-amount="480.00" data-debt-title="Meera pays Asha" type="button">
+                Mark as paid
+              </button>
+<button class="h-9 px-3 text-secondary hover:text-on-surface font-label-md text-label-md rounded-lg transition-colors partial-pay-btn" data-debt-amount="480.00" data-debt-title="Meera pays Asha" type="button">
+                Partial
+              </button>
+</div>
+</div>
+</div>
+<!-- Settlement Row 3 (User Inbound) -->
+<div class="bg-surface-container-lowest rounded-lg p-space-md hover:bg-surface-container-low transition-colors duration-150 flex flex-col lg:flex-row lg:items-center justify-between gap-space-md" data-settlement-id="settle-3">
+<div class="flex items-start sm:items-center gap-space-md min-w-0">
+<!-- Avatars Flow -->
+<div class="flex items-center gap-1.5 shrink-0">
+<div class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-secondary-container" title="Karan Patel">
+                KP
+              </div>
+<span class="material-symbols-outlined text-secondary text-[16px]">arrow_forward</span>
+<div class="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-tabular-header font-semibold text-on-surface" title="Asha Rao">
+                AR
+              </div>
+</div>
+<!-- Descriptor & Breakdown -->
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2 flex-wrap">
+<span class="font-label-lg text-label-lg text-on-surface">
+<strong class="font-semibold text-on-surface">Karan</strong> pays <strong class="font-semibold text-primary">Asha</strong>
+</span>
+<span class="font-caption text-caption text-secondary">Incoming direct transfer</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-caption text-caption text-on-surface-variant truncate">Settles bulk water cans &amp; monthly electricity bill balance</span>
+<span class="text-outline-variant font-caption text-caption">•</span>
+<span class="font-tabular-header text-tabular-header text-secondary uppercase">Ref: #INV-4038</span>
+</div>
+</div>
+</div>
+<!-- Amount and Action Blocks -->
+<div class="flex items-center justify-between lg:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-tabular-summary text-tabular-summary text-tertiary text-[18px]">₹720.00</span>
+<span class="font-caption text-caption text-secondary">Receivable</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-9 px-space-md bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg transition-colors mark-paid-btn" data-debt-amount="720.00" data-debt-title="Karan pays Asha" type="button">
+                Mark as paid
+              </button>
+<button class="h-9 px-3 text-secondary hover:text-on-surface font-label-md text-label-md rounded-lg transition-colors partial-pay-btn" data-debt-amount="720.00" data-debt-title="Karan pays Asha" type="button">
+                Partial
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Settlements Audit Log -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-space-sm">
+<div>
+<h2 class="font-section-heading text-section-heading text-on-surface">Recent settlements</h2>
+<p class="font-caption text-caption text-secondary mt-0.5">Archived settlement transactions verified with zero discrepancy</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-tabular-header text-tabular-header text-secondary">30-day window</span>
+<span class="material-symbols-outlined text-[18px] text-secondary">history</span>
+</div>
+</div>
+<!-- Ledger Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left">
+<thead>
+<tr class="h-10 bg-surface-container-low text-secondary font-tabular-header text-tabular-header">
+<th class="px-space-md rounded-l-lg font-medium">Date</th>
+<th class="px-space-md font-medium">Counterparties</th>
+<th class="px-space-md font-medium">Payment Mode</th>
+<th class="px-space-md font-medium">Receipt / Note</th>
+<th class="px-space-md text-right font-medium">Amount</th>
+<th class="px-space-md text-right rounded-r-lg font-medium">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="historical-settlement-body">
+<tr class="h-11 hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">2024-10-24</td>
+<td class="px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-surface">RK</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">arrow_forward</span>
+<span class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-secondary-container">MS</span>
+<span class="font-body-default text-body-default text-on-surface ml-1">Ravi → Meera</span>
+</div>
+</td>
+<td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+<span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[15px] text-secondary">account_balance</span>
+                  UPI / GPay
+                </span>
+</td>
+<td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+                Oct high-speed fiber internet reconciliation
+              </td>
+<td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+                ₹320.00
+              </td>
+<td class="px-space-md text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[13px]">check</span>
+                  Settled
+                </span>
+</td>
+</tr>
+<tr class="h-11 hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">2024-10-21</td>
+<td class="px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-surface">AR</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">arrow_forward</span>
+<span class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-secondary-container">KP</span>
+<span class="font-body-default text-body-default text-on-surface ml-1">Asha → Karan</span>
+</div>
+</td>
+<td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+<span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[15px] text-secondary">sync_alt</span>
+                  IMPS Transfer
+                </span>
+</td>
+<td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+                Deep cleaning service deposit share
+              </td>
+<td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+                ₹1,150.00
+              </td>
+<td class="px-space-md text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[13px]">check</span>
+                  Settled
+                </span>
+</td>
+</tr>
+<tr class="h-11 hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">2024-10-18</td>
+<td class="px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-secondary-container">MS</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">arrow_forward</span>
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-surface">AR</span>
+<span class="font-body-default text-body-default text-on-surface ml-1">Meera → Asha</span>
+</div>
+</td>
+<td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+<span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[15px] text-secondary">payments</span>
+                  Cash Handover
+                </span>
+</td>
+<td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+                Cook weekly stipend balance
+              </td>
+<td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+                ₹500.00
+              </td>
+<td class="px-space-md text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[13px]">check</span>
+                  Settled
+                </span>
+</td>
+</tr>
+<tr class="h-11 hover:bg-surface-container-low transition-colors duration-150">
+<td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">2024-10-12</td>
+<td class="px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-secondary-container">KP</span>
+<span class="material-symbols-outlined text-secondary text-[14px]">arrow_forward</span>
+<span class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center font-tabular-header text-[10px] font-semibold text-on-surface">RK</span>
+<span class="font-body-default text-body-default text-on-surface ml-1">Karan → Ravi</span>
+</div>
+</td>
+<td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+<span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[15px] text-secondary">account_balance</span>
+                  UPI / PhonePe
+                </span>
+</td>
+<td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+                Water supply canister refill #12
+              </td>
+<td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+                ₹260.00
+              </td>
+<td class="px-space-md text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+<span class="material-symbols-outlined text-[13px]">check</span>
+                  Settled
+                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between pt-space-xs text-secondary font-caption text-caption">
+<span class="">Showing 4 of 4 historical clearings in current period</span>
+<button class="hover:text-on-surface font-label-md text-caption underline decoration-outline-variant underline-offset-4" type="button">
+          View full audit trail
+        </button>
+</div>
+</div>
+<!-- Settlement Confirmation / Record Dialog (Modal Overlay) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-background/20 backdrop-blur-none hidden" id="record-modal">
+<div class="bg-surface-container-lowest rounded-lg max-w-[480px] w-full p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex flex-col">
+<h3 class="font-section-heading text-section-heading text-on-surface" id="modal-heading">Record Settlement</h3>
+<span class="font-caption text-caption text-secondary" id="modal-sub">Direct ledger adjustment</span>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-secondary hover:bg-surface-container-low transition-colors" id="close-modal-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-space-md" id="record-settlement-form">
+<div class="flex flex-col gap-1">
+<label class="font-tabular-header text-tabular-header text-secondary uppercase">Counterparties</label>
+<div class="grid grid-cols-2 gap-space-sm">
+<select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-payer-select">
+<option value="Asha">Asha Rao (You)</option>
+<option value="Meera">Meera Sen</option>
+<option value="Karan">Karan Patel</option>
+<option value="Ravi">Ravi Kumar</option>
+</select>
+<select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-payee-select">
+<option value="Ravi">Ravi Kumar</option>
+<option value="Asha">Asha Rao (You)</option>
+<option value="Meera">Meera Sen</option>
+<option value="Karan">Karan Patel</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-tabular-header text-tabular-header text-secondary uppercase">Amount</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 font-tabular-body text-tabular-body text-secondary">₹</span>
+<input class="w-full h-9 pl-7 pr-3 rounded-lg bg-surface-container-low font-tabular-body text-tabular-body text-on-surface focus:outline-none" id="modal-amount-input" required="" step="0.01" type="number" value="640.00">
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-tabular-header text-tabular-header text-secondary uppercase">Settlement Method</label>
+<select class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-method-select">
+<option value="UPI">UPI / Instant Pay</option>
+<option value="Bank transfer">Direct Bank Transfer (IMPS/NEFT)</option>
+<option value="Cash">Cash Settlement</option>
+<option value="Other">Other Adjustment</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-tabular-header text-tabular-header text-secondary uppercase">Note / Memo</label>
+<input class="h-9 px-3 rounded-lg bg-surface-container-low font-body-default text-body-default text-on-surface focus:outline-none" id="modal-memo-input" placeholder="e.g. October utilities final clearance" type="text">
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button class="h-9 px-space-md rounded-lg text-secondary hover:bg-surface-container-low font-label-md text-label-md transition-colors" id="cancel-modal-btn" type="button">
+              Cancel
+            </button>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-colors" type="submit">
+              Confirm &amp; Record
+            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Notification Toast Element -->
+<div class="fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-lg font-body-default text-body-default flex items-center gap-3 transition-opacity duration-200 opacity-0 pointer-events-none" id="settlement-toast">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed">check_circle</span>
+<span id="toast-message" class="">Settlement recorded successfully.</span>
+</div>
+</div>
+</div>
+<script>
+  (function initSettleUpWorkflow() {
+    const recordModal = document.getElementById('record-modal');
+    const openRecordBtn = document.getElementById('open-record-modal-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const cancelModalBtn = document.getElementById('cancel-modal-btn');
+    const recordForm = document.getElementById('record-settlement-form');
+    const modalHeading = document.getElementById('modal-heading');
+    const modalPayerSelect = document.getElementById('modal-payer-select');
+    const modalPayeeSelect = document.getElementById('modal-payee-select');
+    const modalAmountInput = document.getElementById('modal-amount-input');
+    const modalMethodSelect = document.getElementById('modal-method-select');
+    const modalMemoInput = document.getElementById('modal-memo-input');
+    const toast = document.getElementById('settlement-toast');
+    const toastMessage = document.getElementById('toast-message');
+    const historyBody = document.getElementById('historical-settlement-body');
+
+    function showToast(msg) {
+      toastMessage.textContent = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    function openModal(payer = 'Asha', payee = 'Ravi', amount = '640.00', memo = 'Full clearance balance') {
+      modalPayerSelect.value = payer;
+      modalPayeeSelect.value = payee;
+      modalAmountInput.value = amount;
+      modalMemoInput.value = memo;
+      modalHeading.textContent = `Record Settlement`;
+      recordModal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      recordModal.classList.add('hidden');
+    }
+
+    if (openRecordBtn) {
+      openRecordBtn.addEventListener('click', () => openModal('Asha', 'Ravi', '640.00', 'Regular settlement'));
+    }
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+
+    // Bind Quick Action Buttons
+    document.querySelectorAll('.mark-paid-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const row = this.closest('[data-settlement-id]');
+        const debtTitle = this.getAttribute('data-debt-title') || 'Settlement';
+        const amount = this.getAttribute('data-debt-amount') || '0.00';
+
+        // Add to history
+        const now = new Date();
+        const dateStr = now.toISOString().split('T')[0];
+
+        const newRow = document.createElement('tr');
+        newRow.className = 'h-11 hover:bg-surface-container-low transition-colors duration-150';
+        newRow.innerHTML = `
+          <td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">${dateStr}</td>
+          <td class="px-space-md">
+            <span class="font-body-default text-body-default text-on-surface font-medium">${debtTitle.replace(' pays ', ' → ')}</span>
+          </td>
+          <td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+            <span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+              <span class="material-symbols-outlined text-[15px] text-secondary">check_circle</span>
+              Direct Settlement
+            </span>
+          </td>
+          <td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+            Instant ledger reconciliation
+          </td>
+          <td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+            ₹${amount}
+          </td>
+          <td class="px-space-md text-right">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+              <span class="material-symbols-outlined text-[13px]">check</span>
+              Settled
+            </span>
+          </td>
+        `;
+
+        if (historyBody) {
+          historyBody.prepend(newRow);
+        }
+
+        // Animate out row
+        if (row) {
+          row.style.opacity = '0.4';
+          row.style.pointerEvents = 'none';
+          this.textContent = 'Cleared';
+          this.classList.add('bg-surface-container-high', 'text-tertiary');
+        }
+
+        showToast(`Settlement '${debtTitle}' of ₹${amount} marked as paid`);
+      });
+    });
+
+    document.querySelectorAll('.partial-pay-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const debtTitle = this.getAttribute('data-debt-title') || '';
+        const amount = parseFloat(this.getAttribute('data-debt-amount') || '0');
+        const halfAmount = (amount / 2).toFixed(2);
+
+        let payer = 'Asha';
+        let payee = 'Ravi';
+        if (debtTitle.includes('Meera pays Asha')) {
+          payer = 'Meera';
+          payee = 'Asha';
+        } else if (debtTitle.includes('Karan pays Asha')) {
+          payer = 'Karan';
+          payee = 'Asha';
+        }
+
+        openModal(payer, payee, halfAmount, 'Partial tranche payment');
+      });
+    });
+
+    if (recordForm) {
+      recordForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const payer = modalPayerSelect.value;
+        const payee = modalPayeeSelect.value;
+        const amount = parseFloat(modalAmountInput.value || 0).toFixed(2);
+        const method = modalMethodSelect.value;
+        const memo = modalMemoInput.value || 'Custom settlement adjustment';
+        const dateStr = new Date().toISOString().split('T')[0];
+
+        const newRow = document.createElement('tr');
+        newRow.className = 'h-11 hover:bg-surface-container-low transition-colors duration-150';
+        newRow.innerHTML = `
+          <td class="px-space-md font-tabular-body text-tabular-body text-secondary whitespace-nowrap">${dateStr}</td>
+          <td class="px-space-md">
+            <span class="font-body-default text-body-default text-on-surface font-medium">${payer} → ${payee}</span>
+          </td>
+          <td class="px-space-md font-body-default text-body-default text-on-surface-variant">
+            <span class="inline-flex items-center gap-1.5 font-tabular-header text-tabular-header">
+              <span class="material-symbols-outlined text-[15px] text-secondary">payment</span>
+              ${method}
+            </span>
+          </td>
+          <td class="px-space-md font-body-default text-body-default text-secondary truncate max-w-[240px]">
+            ${memo}
+          </td>
+          <td class="px-space-md text-right font-tabular-body text-tabular-body font-medium text-on-surface">
+            ₹${amount}
+          </td>
+          <td class="px-space-md text-right">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-surface-container-high text-tertiary font-tabular-header text-tabular-header">
+              <span class="material-symbols-outlined text-[13px]">check</span>
+              Settled
+            </span>
+          </td>
+        `;
+
+        if (historyBody) {
+          historyBody.prepend(newRow);
+        }
+
+        closeModal();
+        showToast(`Payment of ₹${amount} recorded from ${payer} to ${payee}`);
+      });
+    }
+
+    // Group filter listener
+    const groupSelect = document.getElementById('group-filter');
+    if (groupSelect) {
+      groupSelect.addEventListener('change', function() {
+        showToast(`Recalibrated debt network for: ${this.options[this.selectedIndex].text}`);
+      });
+    }
+  })();
+</script></main></div>
+
+</body></html>

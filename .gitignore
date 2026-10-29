@@ -1,0 +1,52 @@
+# ==============================================================================
+# Expense Splitter — Git Ignore Configuration
+# ==============================================================================
+
+# --- Build Outputs & Compilation ---
+target/
+*.class
+dependency-reduced-pom.xml
+
+# --- Native Packaging & Distribution Outputs ---
+dist/
+package-input/
+tools/
+*.jar
+*.war
+*.ear
+
+# --- Local Databases & SQLite Files ---
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+expense_splitter.db
+
+# --- Logs & Runtime Output ---
+*.log
+logs/
+
+# --- Temporary Test & Diagnostic Artifacts ---
+rendered_dom.html
+web_screenshot.png
+test_*.png
+
+# --- Environment & Credentials ---
+.env
+.env.*
+*.key
+*.pem
+*.p12
+
+# --- IDE & Operating System Artifacts ---
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.DS_Store
+Thumbs.db
+desktop.ini
